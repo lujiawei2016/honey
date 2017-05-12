@@ -3,6 +3,7 @@ package com.weixin.honey.font.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,8 @@ import com.weixin.honey.pojo.Banner;
 @RequestMapping("/banner")
 public class BannerController {
 	
+	private static final Logger logger = Logger.getLogger(BannerController.class);
+	
 	@Autowired
 	private BannerService bannerService;
 
@@ -36,8 +39,9 @@ public class BannerController {
 	public String listBanner(ModelMap modelMap){
 		List<Banner> bannerList = new ArrayList<>();
 		try {
-			bannerList = bannerService.findAllBanner();
+			bannerList = (List<Banner>) bannerService.findAllBanner();
 		} catch (Exception e) {
+			logger.error("列出banner异常");
 			e.printStackTrace();
 		}
 		modelMap.put("bannerList", bannerList);
@@ -69,6 +73,7 @@ public class BannerController {
 		try {
 			result = bannerService.updateBanner(banner);
 		} catch (Exception e) {
+			logger.error("新增或更新banner异常");
 			e.printStackTrace();
 		}
 		return result;
@@ -87,6 +92,7 @@ public class BannerController {
 		try {
 			result = bannerService.deleteBanner(bannerId);
 		} catch (Exception e) {
+			logger.error("删除banner异常");
 			e.printStackTrace();
 		}
 		return result;

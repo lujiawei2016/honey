@@ -33,7 +33,7 @@ public class MainController {
 	public String index(ModelMap modelMap){
 		List<Banner> bannerList = new ArrayList<>();
 		try {
-			bannerList = bannerService.findAllBanner();
+			bannerList = (List<Banner>) bannerService.findAllBanner();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -100,4 +100,10 @@ public class Banner implements Serializable {
 		this.sort = sort;
 	}
 
+	@Override
+	public String toString() {
+		return "Banner [bannerId=" + bannerId + ", imgUrl=" + imgUrl + ", imgName=" + imgName + ", url=" + url
+				+ ", sort=" + sort + ", delflag=" + delflag + "]";
+	}
+	
 }

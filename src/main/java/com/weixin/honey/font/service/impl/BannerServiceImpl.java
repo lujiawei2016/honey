@@ -1,16 +1,20 @@
 package com.weixin.honey.font.service.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.weixin.honey.dao.BaseDao;
 import com.weixin.honey.font.service.BannerService;
 import com.weixin.honey.pojo.Banner;
+import com.weixin.honey.util.RedisUtils;
 
 /**
  * 轮播图实现类
@@ -22,17 +26,38 @@ import com.weixin.honey.pojo.Banner;
 @Transactional
 public class BannerServiceImpl implements BannerService {
 	
+	private static final Logger logger = Logger.getLogger(BannerServiceImpl.class);
+	
 	@Autowired
 	private BaseDao<Banner, Serializable> bannerDao;
+	
+	@Autowired
+	private RedisUtils redisUtils;
+	
+	@Value("${bannerRedis}")
+	private String bannerRedis;
 	
 	/**
 	 * 查找所有的banner
 	 */
 	@Override
-	public List<Banner> findAllBanner() throws Exception {
-		String hql = "from Banner b where b.delflag=0 order by b.sort";
-		List<Banner> bannerList = bannerDao.findByHql(hql);
-		return bannerList;
+	public Object findAllBanner() throws Exception {
+		List<Banner> bannerList = new ArrayList<>();
+		List<Object> objList = redisUtils.getList(bannerRedis, 0, -1);
+		if(objList == null || objList.size() == 0){
+			//redis中没有banner数据，需要将数据放入到redis中
+			logger.info("从数据库取出banner信息并放入到redis中");
+			String hql = "from Banner b where b.delflag=0 order by b.sort";
+			bannerList = bannerDao.findByHql(hql);
+			for(Banner banner:bannerList){
+				redisUtils.setList(bannerRedis, banner);
+			}
+			return bannerList;
+		}else{
+			//直接从redis中取出
+			logger.info("直接从redis取出banner信息");
+			return objList;
+		}
 	}
 
 	/**
@@ -45,9 +70,13 @@ public class BannerServiceImpl implements BannerService {
 			//新增
 			bannerDao.save(banner);
 			result = "1";
+			logger.info("新增banner成功");
 		}else{
 			result = "2";
 		}
+		
+		redisUtils.delete(bannerRedis);
+		
 		return result;
 	}
 
@@ -60,10 +89,15 @@ public class BannerServiceImpl implements BannerService {
 		if(!StringUtils.isBlank(bannerId) && StringUtils.isNumeric(bannerId)){
 			//进行删除
 			Banner banner = bannerDao.findById(Banner.class, Integer.parseInt(bannerId));
-			banner.setDelflag(1);
-			bannerDao.update(banner);
-			result = "1";
+			if(banner != null){
+				banner.setDelflag(1);
+				bannerDao.update(banner);
+				result = "1";
+			}
 		}
+		
+		redisUtils.delete(bannerRedis);
+		
 		return result;
 	}
 

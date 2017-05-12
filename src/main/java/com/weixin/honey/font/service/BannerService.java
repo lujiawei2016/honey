@@ -17,7 +17,7 @@ public interface BannerService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Banner> findAllBanner() throws Exception;
+	public Object findAllBanner() throws Exception;
 	
 	/**
 	 * 添加或者更新banner
