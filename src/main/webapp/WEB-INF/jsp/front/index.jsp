@@ -69,7 +69,7 @@
 					<section class="slider" style="margin:0  auto; width:100%">
 						<div class="swiper-container swiper-container2 swiper-container-horizontal">
 							<div class="swiper-wrapper tuangouwidth" style="transition-duration: 0ms; transform: translate3d( 0px, 0px);">
-								<div class="swiper-slide swiper-slide-duplicate swiper-slide-active" style="width: 640px;">
+								<div class="swiper-slide swiper-slide-duplicate swiper-slide-active" style="width: 100%;">
 									<ul class="icon-list">
 										<li class="icon">
 											<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/bag.html">
@@ -321,8 +321,6 @@
 		switchLoad : "_src" // 切换加载，真实图片路径为"_src"
 	});
 </script>
-<script src="${ctx}/resource/js/main/aui-scroll.js" type="text/javascript" charset="utf-8"></script>
-<script src="${ctx}/resource/js/main/aui-index.js" type="text/javascript" charset="utf-8"></script>
 <script src="${ctx}/resource/js/main/aui-swipe.js" type="text/javascript" charset="utf-8"></script>
 
 

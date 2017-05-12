@@ -1,7 +1,6 @@
 package com.weixin.honey.font.service.impl;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -37,26 +36,34 @@ public class BannerServiceImpl implements BannerService {
 	@Value("${bannerRedis}")
 	private String bannerRedis;
 	
+	private volatile static List<Object> bannerList;
+	
 	/**
 	 * 查找所有的banner
+	 * 利用单例模式
 	 */
 	@Override
 	public Object findAllBanner() throws Exception {
-		List<Banner> bannerList = new ArrayList<>();
-		List<Object> objList = redisUtils.getList(bannerRedis, 0, -1);
-		if(objList == null || objList.size() == 0){
+		bannerList = redisUtils.getList(bannerRedis, 0, -1);
+		if(bannerList == null || bannerList.size() == 0){
 			//redis中没有banner数据，需要将数据放入到redis中
 			logger.info("从数据库取出banner信息并放入到redis中");
-			String hql = "from Banner b where b.delflag=0 order by b.sort";
-			bannerList = bannerDao.findByHql(hql);
-			for(Banner banner:bannerList){
-				redisUtils.setList(bannerRedis, banner);
+			synchronized (BannerServiceImpl.class) {
+				if(bannerList == null || bannerList.size() == 0){
+					String hql = "from Banner b where b.delflag=0 order by b.sort";
+					bannerList = bannerDao.findByHql(hql);
+					for(Object obj:bannerList){
+						//将值放入到redis中
+						Banner banner = (Banner) obj;
+						redisUtils.setList(bannerRedis, banner);
+					}
+				}
 			}
 			return bannerList;
 		}else{
 			//直接从redis中取出
 			logger.info("直接从redis取出banner信息");
-			return objList;
+			return bannerList;
 		}
 	}
 

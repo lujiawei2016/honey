@@ -16,7 +16,7 @@
 <div class="col-md-7 col-md-offset-2">
 	<div class="box box-info">
 	  <div class="box-header with-border">
-	    <h3 class="box-title">banner</h3>
+	    <h3 class="box-title">banner（推荐尺寸：720px * 350px;）</h3>
 	  </div>
 	  <!-- /.box-header -->
 	  <!-- form start -->
