@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/cache  
+    http://www.springframework.org/schema/cache/spring-cache-3.2.xsd">
+	
+	<!-- bean的自动扫描 -->
+	<context:component-scan base-package="com.weixin.honey"></context:component-scan>
+	
+	<!-- 配置切面 -->
+	<aop:aspectj-autoproxy />
+	
+	<!-- 导入外部连接数据库文件 -->
+	<!-- 导入配置文件 -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<!-- 导入数据库文件 -->
+				<value>classpath:/jdbc.properties</value>
+				<!-- 导入配置文件 -->
+				<value>classpath:/config.properties</value>
+				<!-- 导入redis配置文件 -->
+				<value>classpath:/redis.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 配置数据库连接 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+		
+		<property name = "filters" value = "${filters}" />    
+        <!-- 最大并发连接数 -->  
+        <property name = "maxActive" value = "${maxActive}" />  
+        <!-- 初始化连接数量 -->  
+        <property name = "initialSize" value = "${initialSize}" />  
+        <!-- 配置获取连接等待超时的时间 -->  
+        <property name = "maxWait" value = "${maxWait}" />  
+        <!-- 最小空闲连接数 -->  
+        <property name = "minIdle" value = "${minIdle}" />    
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->  
+        <property name = "timeBetweenEvictionRunsMillis" value ="${timeBetweenEvictionRunsMillis}" />  
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->  
+        <property name = "minEvictableIdleTimeMillis" value ="${minEvictableIdleTimeMillis}" />    
+        <property name = "validationQuery" value = "${validationQuery}" />    
+        <property name = "testWhileIdle" value = "${testWhileIdle}" />    
+        <property name = "testOnBorrow" value = "${testOnBorrow}" />    
+        <property name = "testOnReturn" value = "${testOnReturn}" />    
+        <property name = "maxOpenPreparedStatements" value ="${maxOpenPreparedStatements}" />  
+        <!-- 打开 removeAbandoned 功能 -->  
+        <property name = "removeAbandoned" value = "${removeAbandoned}" />  
+        <!-- 1800 秒，也就是 30 分钟 -->  
+        <property name = "removeAbandonedTimeout" value ="${removeAbandonedTimeout}" />  
+        <!-- 关闭 abanded 连接时输出错误日志 -->     
+        <property name = "logAbandoned" value = "${logAbandoned}" /> 
+	</bean>
+	
+	<!-- 配置sessionFactory -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.connection.autocommit">true</prop>
+				
+				<!-- 将hibernate和Ehcache整合 -->
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+			</props>
+		</property>
+		<property name="packagesToScan">
+			<list>
+				<value>com.weixin.honey.pojo</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- sessionFactory注入到HibernateTemplate，将模板注入给dao -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 事务配置 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- ehcache配置 -->
+	<cache:annotation-driven cache-manager="cacheManager"/>
+	<bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">  
+        <property name="configLocation" value="classpath:ehcache.xml" />  
+    </bean>
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+		<property name="cacheManager" ref="cacheManagerFactory"></property>
+	</bean>
+	
+	<!-- redis配置 -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
+        <property name="maxIdle" value="${redis.maxIdle}" />  
+        <property name="maxTotal" value="${redis.maxActive}" />  
+        <property name="maxWaitMillis" value="${redis.maxWait}" />   
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />  
+        <property name="testOnReturn" value="true" />  
+    </bean>  
+  
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+    	<property name="poolConfig" ref="jedisPoolConfig"></property>
+    	<property name="hostName" value="${redis.host}"></property>
+    	<property name="port" value="${redis.port}"></property>
+    	<!-- <property name="password" value="${redis.pass}"></property> -->
+    	<property name="timeout" value="${redis.timeout}"></property>
+        <property name="usePool" value="${redis.usePool}"></property>
+    </bean>
+          
+    <!-- redis 序列化策略 ，手动指定 key 采用String序列化策略 -->  
+    <bean id="stringSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer" />  
+      
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">  
+        <property name="connectionFactory" ref="connectionFactory" />  
+        <property name="keySerializer" ref="stringSerializer" />
+        <property name="hashKeySerializer" ref="stringSerializer"></property>  
+        <!-- 开启事务，可以通过transcational注解控制 -->  
+        <property name="enableTransactionSupport" value="true" />  
+    </bean> 
+	
+	<!-- 引入shiro配置文件 -->
+	<import resource="classpath:shiro.xml"/>
+	
+</beans>
