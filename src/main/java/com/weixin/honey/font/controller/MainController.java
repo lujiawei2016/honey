@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.weixin.honey.font.service.BannerService;
+import com.weixin.honey.font.service.CategoryService;
 import com.weixin.honey.pojo.Banner;
 
 /**
@@ -23,6 +24,9 @@ public class MainController {
 	
 	@Autowired
 	private BannerService bannerService;
+	
+	@Autowired
+	private CategoryService categoryService;
 
 	/**
 	 * 跳到主页
@@ -31,14 +35,17 @@ public class MainController {
 	 */
 	@RequestMapping(value="/index",produces="text/json;charset=UTF-8")
 	public String index(ModelMap modelMap){
-		List<Banner> bannerList = new ArrayList<>();
+		Object bannerList = null;
+		Object categoryList = null;
 		try {
-			bannerList = (List<Banner>) bannerService.findAllBanner();
+			bannerList = bannerService.findAllBanner();
+			categoryList = categoryService.findAllCategory();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		modelMap.put("bannerList", bannerList);
+		modelMap.put("categoryList", categoryList);
 		
 		return "front/index";
 	}

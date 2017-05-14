@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <jsp:include page="../../../../resource/resource.jsp"></jsp:include>
-<title>banner列表</title>
+<title>种类列表</title>
 </head>
 <body>
 <input type="hidden" id="path" value="${ctx}" />
@@ -14,12 +14,12 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">banner列表</h3>
+              <h3 class="box-title">种类列表</h3>
 
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                   <div class="input-group-btn">
-                    <a type="button" class="btn btn-default" id="add" href="${ctx}/banner/goUpdate"><i class="fa fa-plus"></i> 添加banner</a>
+                    <a type="button" class="btn btn-default" id="add" href="${ctx}/category/goUpdate"><i class="fa fa-plus"></i> 添加种类</a>
                   </div>
                 </div>
               </div>
@@ -31,22 +31,17 @@
                 <tr>
                   <th>ID</th>
                   <th>图片</th>
-                  <th>跳转地址</th>
+                  <th>种类名</th>
                   <th>排序</th>
                   <th>操作</th>
                 </tr>
-                <c:forEach var="banner" items="${bannerList}" varStatus="vs">
+                <c:forEach var="category" items="${categoryList}" varStatus="vs">
                 	<tr>
-	                  <td>${vs.index+1}</td>
-	                  <td>
-	                  	<img alt="${banner.imgName}" src="${ctx}/${banner.imgUrl}" width="150" height="72">
-	                  </td>
-	                  <td>${banner.url}</td>
-	                  <td>${banner.sort}</td>
-	                  <td>
-	                  	<a href="javascript:;" class="delete">删除</a>
-	                  	<input type="hidden" value="${banner.bannerId}" />
-	                  </td>
+	                  <td>${vs.index}</td>
+	                  <td><img alt="${category.cateName}" src="${ctx}/${category.imgUrl}"> </td>
+	                  <td>${category.cateName}</td>
+	                  <td>${category.sort}</td>
+	                  <td><a href="javascript:;" class="delete">删除</a> <input type="hidden" value="${category.categoryId}" /></td>
 	                </tr>
                 </c:forEach>
               </tbody></table>
@@ -56,7 +51,6 @@
           <!-- /.box -->
         </div>
       </div>
-      
-<script type="text/javascript" src="${ctx}/resource/js/banner/banner_list.js"></script>
+      <script type="text/javascript" src="${ctx}/resource/js/category/category_list.js"></script>
 </body>
 </html>

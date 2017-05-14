@@ -11,9 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  * 用户类
@@ -41,6 +44,11 @@ public class User implements Serializable {
 	@JoinTable(name="tb_user_roles",joinColumns={@JoinColumn(name="user_id")},inverseJoinColumns={@JoinColumn(name="roles_id")})
 	@JsonIgnore
 	private Set<Roles> roles;
+	
+	@OneToMany(targetEntity=Comments.class,mappedBy="user",orphanRemoval=true)
+	@Cascade(value={CascadeType.ALL})
+	@JsonIgnore
+	private Set<Comments> comments;
 	
 	public int getId() {
 		return id;
@@ -74,6 +82,14 @@ public class User implements Serializable {
 		this.roles = roles;
 	}
 	
+	public Set<Comments> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<Comments> comments) {
+		this.comments = comments;
+	}
+
 	public User() {
 		super();
 	}

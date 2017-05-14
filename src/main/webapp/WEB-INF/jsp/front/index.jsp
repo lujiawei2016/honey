@@ -71,7 +71,15 @@
 							<div class="swiper-wrapper tuangouwidth" style="transition-duration: 0ms; transform: translate3d( 0px, 0px);">
 								<div class="swiper-slide swiper-slide-duplicate swiper-slide-active" style="width: 100%;">
 									<ul class="icon-list">
-										<li class="icon">
+										<c:forEach var="category" items="${categoryList}">
+											<li class="icon">
+												<a href="javascript:;">
+													<span class="icon-circle"><img src="${ctx}/${category.imgUrl}"></span>
+													<span class="icon-desc">${category.cateName}</span>
+												</a>
+											</li>
+										</c:forEach>
+										<%-- <li class="icon">
 											<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/bag.html">
 												<span class="icon-circle"><img src="${ctx}/resource/images/main/icon-tuan.png"></span>
 												<span class="icon-desc">红包</span>
@@ -118,7 +126,7 @@
 												<span class="icon-circle"><img src="${ctx}/resource/images/main/icon-tuan7.png"></span>
 												<span class="icon-desc">达人</span>
 											</a>
-										</li>
+										</li> --%>
 									</ul>
 								</div>
 							</div>
@@ -130,13 +138,13 @@
 		<!-- 分类切换 end -->
 		<div class="devider t-line"></div>
 		<div class="b-line" style="position:relative"></div>
-		<div class="b-line">
+		<%-- <div class="b-line">
 			<a class="home-inform aui-home-inform" data-href="home-slogan.html" target="navView" rel="slogan">
 				<i class="name icon-inform"></i>
 				<span style="font-size:14px; padding-left:5px">APP新版本上线换一种方式购物</span>
 			</a>
 		</div>
-		<div class="my-car-thumbnail"><img src="${ctx}/resource/images/main/banner-car.jpg"></div>
+		<div class="my-car-thumbnail"><img src="${ctx}/resource/images/main/banner-car.jpg"></div> --%>
 
 		<div class="aui-title-h">
 			<h2>大牌热卖</h2>
@@ -162,7 +170,7 @@
 				<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#" class="aui-flex-box">热潮时代</a>
 			</div>
 		</div>
-		<div class="aui-title-h">
+		<%-- <div class="aui-title-h">
 			<h2>新品必购</h2>
 		</div>
 		<div class="aui-flex">
@@ -189,7 +197,7 @@
 		</span>
 
 			</div>
-		</div>
+		</div> --%>
 		<div class="aui-title-h">
 			<h2>新品上架</h2>
 		</div>

@@ -200,6 +200,7 @@
               <a href="javascript:;"><i class="fa fa-link"></i> <span>首页管理</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
                 <li><a href="${ctx}/banner/listBanner" target="windowFrame">banner管理</a></li>
+                <li><a href="${ctx}/category/listCategory" target="windowFrame">icon管理</a></li>
               </ul>
             </li>
           </ul><!-- /.sidebar-menu -->
