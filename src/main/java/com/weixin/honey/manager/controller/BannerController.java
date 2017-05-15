@@ -1,4 +1,4 @@
-package com.weixin.honey.font.controller;
+package com.weixin.honey.manager.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.weixin.honey.font.service.BannerService;
+import com.weixin.honey.manager.service.BannerService;
 import com.weixin.honey.pojo.Banner;
 
 /**

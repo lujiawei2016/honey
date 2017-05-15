@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.weixin.honey.font.service.BannerService;
-import com.weixin.honey.font.service.CategoryService;
+import com.weixin.honey.manager.service.BannerService;
+import com.weixin.honey.manager.service.CategoryService;
 import com.weixin.honey.pojo.Banner;
 
 /**

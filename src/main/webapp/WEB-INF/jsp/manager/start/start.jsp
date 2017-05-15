@@ -201,6 +201,7 @@
               <ul class="treeview-menu">
                 <li><a href="${ctx}/banner/listBanner" target="windowFrame">banner管理</a></li>
                 <li><a href="${ctx}/category/listCategory" target="windowFrame">icon管理</a></li>
+                <li><a href="${ctx}/girl/listGirlPage" target="windowFrame">妹纸管理</a></li>
               </ul>
             </li>
           </ul><!-- /.sidebar-menu -->

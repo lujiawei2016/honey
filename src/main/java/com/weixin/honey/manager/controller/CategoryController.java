@@ -1,4 +1,4 @@
-package com.weixin.honey.font.controller;
+package com.weixin.honey.manager.controller;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.weixin.honey.font.service.CategoryService;
+import com.weixin.honey.manager.service.CategoryService;
 import com.weixin.honey.pojo.Category;
 
 /**

@@ -1,4 +1,4 @@
-package com.weixin.honey.font.service.impl;
+package com.weixin.honey.manager.service.impl;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.weixin.honey.dao.BaseDao;
-import com.weixin.honey.font.service.CategoryService;
+import com.weixin.honey.manager.service.CategoryService;
 import com.weixin.honey.pojo.Category;
 import com.weixin.honey.util.RedisUtils;
 
