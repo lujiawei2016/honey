@@ -57,5 +57,15 @@ public class GirlImg implements Serializable {
 	public void setGirl(Girl girl) {
 		this.girl = girl;
 	}
+
+	public GirlImg() {
+		super();
+	}
+
+	public GirlImg(String imgUrl, Girl girl) {
+		super();
+		this.imgUrl = imgUrl;
+		this.girl = girl;
+	}
 	
 }

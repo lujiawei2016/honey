@@ -28,6 +28,7 @@
 	  <form class="form-horizontal" id="updateForm">
 	  	<input type="hidden" name="mainImg" id="mainImg" >
 	    <input type="hidden" name="girlImgs" id="girlImgs">
+	    <input type="hidden" name="girlId" id="girlId">
 	    <div class="box-body">
 	      <div class="form-group">
 	        <label for="up_img" class="col-sm-2 control-label">主页图片</label>
