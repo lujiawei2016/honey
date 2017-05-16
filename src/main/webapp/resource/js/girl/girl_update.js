@@ -46,8 +46,14 @@ $(document).ready(function(){
 		success:function( data ) {
 			var fileLen = $('.fileBoxUl li').length;
 			successCount = successCount + 1;
+			
+			var girlImgs = $('#girlImgs').val();
+			girlImgs = girlImgs + data.imgUrl + ",";
+			$('#girlImgs').val(girlImgs);
+			
 			if(fileLen == successCount){
 				//全部上传成功
+				
 			}
 		},
 		error:function( err ) {
