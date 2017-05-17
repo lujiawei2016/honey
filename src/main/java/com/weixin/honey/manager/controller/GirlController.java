@@ -1,5 +1,6 @@
 package com.weixin.honey.manager.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,6 +20,8 @@ import com.weixin.honey.pojo.Girl;
 @RequestMapping("/girl")
 public class GirlController {
 	
+	private static final Logger logger = Logger.getLogger(GirlController.class);
+	
 	@Autowired
 	private GirlService girlService;
 
@@ -28,7 +31,14 @@ public class GirlController {
 	 * @return
 	 */
 	@RequestMapping("/listGirlPage")
-	public String listGirlPage(ModelMap modelMap){
+	public String listGirlPage(ModelMap modelMap,Girl girl){
+		Object girlList = null;
+		try {
+			girlList = girlService.findGirlFromDatabase(girl);
+			modelMap.put("girlList", girlList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "manager/girl/girl_list";
 	}
 	
@@ -40,6 +50,13 @@ public class GirlController {
 	 */
 	@RequestMapping("/goUpdate")
 	public String goUpdate(String girlId,ModelMap modelMap){
+		Object girl = null;
+		try {
+			girl = girlService.findGirlById(girlId);
+			modelMap.put("girl", girl);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "manager/girl/girl_update";
 	}
 	
@@ -55,6 +72,24 @@ public class GirlController {
 		String result = null;
 		try {
 			result = (String) girlService.update(girl, girlImgs);
+		} catch (Exception e) {
+			logger.error("新增或编辑妹纸异常");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	/**
+	 * 根据id删除图片
+	 * @param girlImgId
+	 * @return
+	 */
+	@RequestMapping("/deleteGirlImgsById")
+	@ResponseBody
+	public String deleteGirlImgsById(String girlImgId){
+		String result = null;
+		try {
+			result = (String) girlService.deleteGirlImgsById(girlImgId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

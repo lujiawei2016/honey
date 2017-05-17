@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +18,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 /**
- * 衣服
+ * 妹纸
  * @author   jiawei
  * @version  V1.0
  * @date     2017年5月13日下午1:52:55
@@ -33,10 +34,10 @@ public class Girl implements Serializable {
 	private int girlId;                 // 主键
 	
 	@Column(name="girlName",nullable=false)
-	private String girlName;            // 衣服名称
+	private String girlName;            // 妹纸名称
 	
 	@Column(name="age")
-	private String age;                 // 年龄
+	private int age;                    // 年龄
 	
 	@Column(name="hight")
 	private String hight;               // 身高
@@ -54,7 +55,7 @@ public class Girl implements Serializable {
 	private String phone;               // 电话
 	
 	@Column(name="price")
-	private String price;               // 价格
+	private int price;                  // 价格
 	
 	@Column(name="address")
 	private String address;             // 地址
@@ -70,6 +71,9 @@ public class Girl implements Serializable {
 	
 	@Column(name="praise")
 	private int praise;                 // 点赞数
+	
+	@Column(name="sort")
+	private int sort;                   // 排序
 	
 	@Column(name="delflag",columnDefinition="INT default 0")
 	private int delflag;                // 删除标志，0-未删除，1-删除
@@ -103,12 +107,12 @@ public class Girl implements Serializable {
 	public void setGirlName(String girlName) {
 		this.girlName = girlName;
 	}
-
-	public String getAge() {
+	
+	public int getAge() {
 		return age;
 	}
 
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 
@@ -150,14 +154,6 @@ public class Girl implements Serializable {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-
-	public String getPrice() {
-		return price;
-	}
-
-	public void setPrice(String price) {
-		this.price = price;
 	}
 
 	public String getAddress() {
@@ -231,6 +227,23 @@ public class Girl implements Serializable {
 	public void setComments(Set<Comments> comments) {
 		this.comments = comments;
 	}
+
+	public int getSort() {
+		return sort;
+	}
+
+	public void setSort(int sort) {
+		this.sort = sort;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	
 	
 	
 }

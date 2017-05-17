@@ -29,7 +29,7 @@ public class GirlImg implements Serializable {
 	
 	@Column(name="imgUrl",nullable=false)
 	private String imgUrl;                 // 图片地址
-
+	
 	@ManyToOne(targetEntity=Girl.class)
 	@JoinColumn(name="girl_id")
 	private Girl girl;
@@ -57,7 +57,7 @@ public class GirlImg implements Serializable {
 	public void setGirl(Girl girl) {
 		this.girl = girl;
 	}
-
+	
 	public GirlImg() {
 		super();
 	}

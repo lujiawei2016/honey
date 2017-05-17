@@ -81,9 +81,15 @@ $(document).ready(function(){
 		var address = $('#address').val();
 		var title = $('#title').val();
 		var description = $('#description').val();
+		var sort = $('#sort').val();
+		
+		if(girlId == null || girlId == undefined || girlId==''){
+			girlId = '0';
+		}
+		
 		$.ajax({
 			url:path+'/girl/update',
-			data:{'mainImg':mainImg,'girlImgs':girlImgs,'girlId':girlId,'girlName':girlName,'age':age,'hight':hight,'weight':weight,'qq':qq,'weixin':weixin,'phone':phone,'price':price,'address':address,'title':title,'description':description},
+			data:{'mainImg':mainImg,'girlImgs':girlImgs,'girlId':girlId,'girlName':girlName,'age':age,'hight':hight,'weight':weight,'qq':qq,'weixin':weixin,'phone':phone,'price':price,'address':address,'title':title,'description':description,'sort':sort},
 			dataType:'json',
 			type:'post',
 			beforeSend:function(){
@@ -91,7 +97,20 @@ $(document).ready(function(){
 			},
 			success:function(result){
 				layer.closeAll();
-				alert(result);
+				if('1' == result){
+					layer.confirm('上传成功，是否继续上传？',{
+						btn:['继续','取消'],
+						icon:1
+					},function(){
+						location.reload();
+					},function(){
+						window.location.href=path+'/girl/listGirlPage';
+					});
+				}else{
+					layer.alert('编辑成功',{
+						icon:1
+					});
+				}
 			},
 			error:function(result){
 				layer.closeAll();
@@ -119,9 +138,6 @@ $(document).ready(function(){
 			mainImg:{
 				required:true
 			},
-			girlImgs:{
-				required:true
-			},
 			girlName:{
 				required:true
 			},
@@ -130,14 +146,16 @@ $(document).ready(function(){
 			},
 			title:{
 				required:true
-			}
+			},
+			sort:{
+				required:true,
+				min:1,
+				number:true
+			},
 		},
 		messages:{
 			mainImg:{
 				required:'请上传主页图片上传'
-			},
-			girlImgs:{
-				required:'请上传图片'
 			},
 			girlName:{
 				required:'妹纸名称不能为空'
@@ -147,7 +165,12 @@ $(document).ready(function(){
 			},
 			title:{
 				required:'标题不能为空'
-			}
+			},
+			sort:{
+				required:'排序不能为空',
+				min:'数字必须大于1',
+				number:'数字必须大于1'
+			},
 		},
 		showErrors : function(errorMap, errorList) {
 			var msg = "";
@@ -162,9 +185,66 @@ $(document).ready(function(){
 		onfocusout : false,
         onkeyup: false,
         onsubmit: true,
+        ignore:"",
         submitHandler:function(){
-        	$('.diyStart').click();
+        	var len = $('.fileBoxUl li').length;
+        	if(len == 0){
+        		updateGirl();
+        	}else{
+        		$('.diyStart').click();
+        	}
         }
 	});
+	
+	//点击删除
+	$(document).on('click','.deleteGirlImgs',function(){
+		var thisImg = $(this);
+		var girlImgId = thisImg.next().val();
+		layer.confirm('确定删除',{
+			btn:['确定','取消'],
+			icon:0
+		},function(){
+			$.ajax({
+				url:path+'/girl/deleteGirlImgsById',
+				data:{'girlImgId':girlImgId},
+				dataType:'json',
+				type:'post',
+				beforeSend:function(){
+					layer.load(1);
+				},
+				success:function(result){
+					layer.closeAll();
+					if('1' == result){
+						layer.alert('删除成功',{
+							icon:1
+						});
+						thisImg.parents('tr').remove();
+					}else{
+						layer.alert('删除失败',{
+							icon:2
+						});
+					}
+				},
+				error:function(result){
+					layer.closeAll();
+					if(result.responseText == 'ajaxIsTimeOut'){
+						layer.confirm('您的登陆已过期，请重新登陆',{
+							icon:2
+						},function(){
+							window.location.href='${ctx}/loginView/login';
+						});
+					}else if(result.responseText.indexOf('没有权限') > 0){
+						layer.alert('没有权限进行该操作',{
+							icon:2
+						});
+					}else{
+						layer.alert('系统繁忙，请稍后重试....',{
+							icon:2
+						});
+					}
+				}
+			});
+		});
+	})
 	
 });

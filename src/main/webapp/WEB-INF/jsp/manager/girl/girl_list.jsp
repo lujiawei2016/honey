@@ -32,22 +32,25 @@
                 <tr>
                   <th>ID</th>
                   <th>图片</th>
-                  <th>跳转地址</th>
+                  <th>妹纸名称</th>
+                  <th>电话</th>
+                  <th>价格</th>
+                  <th>地址</th>
                   <th>排序</th>
                   <th>操作</th>
                 </tr>
-                <c:forEach var="banner" items="${bannerList}" varStatus="vs">
+                <c:forEach var="girl" items="${girlList}" varStatus="vs">
                 	<tr>
 	                  <td>${vs.index+1}</td>
 	                  <td>
-	                  	<img alt="${banner.imgName}" src="${ctx}/${banner.imgUrl}" width="150" height="72">
+	                  	<img width="75" alt="" src="${ctx}/${girl.mainImg}">
 	                  </td>
-	                  <td>${banner.url}</td>
-	                  <td>${banner.sort}</td>
-	                  <td>
-	                  	<a href="javascript:;" class="delete">删除</a>
-	                  	<input type="hidden" value="${banner.bannerId}" />
-	                  </td>
+	                  <td>${girl.girlName}</td>
+	                  <td>${girl.phone}</td>
+	                  <td>${girl.price}</td>
+	                  <td>${girl.address}</td>
+	                  <td>${girl.sort}</td>
+	                  <td><a href="${ctx}/girl/goUpdate?girlId=${girl.girlId}">详情</a></td>
 	                </tr>
                 </c:forEach>
               </tbody></table>
