@@ -43,8 +43,7 @@ public class Category implements Serializable {
 	@Column(name="delflag",columnDefinition="INT default 0")
 	private int delflag;            // 删除标志，0-未删除，1-删除
 	
-	@ManyToMany(targetEntity=Girl.class)
-	@JoinTable(name="tb_category_girl",joinColumns={@JoinColumn(name="category_id")},inverseJoinColumns={@JoinColumn(name="girl_id")})
+	@ManyToMany(targetEntity=Girl.class,mappedBy="category")
 	@JsonIgnore
 	private Set<Girl> girl;
 	

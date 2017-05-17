@@ -1,5 +1,11 @@
 package com.weixin.honey.manager.controller;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,7 +13,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.weixin.honey.manager.service.CategoryService;
 import com.weixin.honey.manager.service.GirlService;
+import com.weixin.honey.pojo.Category;
 import com.weixin.honey.pojo.Girl;
 
 /**
@@ -24,6 +32,9 @@ public class GirlController {
 	
 	@Autowired
 	private GirlService girlService;
+	
+	@Autowired
+	private CategoryService categoryService;
 
 	/**
 	 * 列出妹纸
@@ -37,6 +48,7 @@ public class GirlController {
 			girlList = girlService.findGirlFromDatabase(girl);
 			modelMap.put("girlList", girlList);
 		} catch (Exception e) {
+			logger.error("列出妹纸异常");
 			e.printStackTrace();
 		}
 		return "manager/girl/girl_list";
@@ -51,10 +63,15 @@ public class GirlController {
 	@RequestMapping("/goUpdate")
 	public String goUpdate(String girlId,ModelMap modelMap){
 		Object girl = null;
+		Object categoryList = null;
 		try {
 			girl = girlService.findGirlById(girlId);
+			categoryList = categoryService.findAllCategory();
+			
 			modelMap.put("girl", girl);
+			modelMap.put("categoryList", categoryList);
 		} catch (Exception e) {
+			logger.error("跳转到添加或者编辑妹纸的页面异常");
 			e.printStackTrace();
 		}
 		return "manager/girl/girl_update";
@@ -68,10 +85,10 @@ public class GirlController {
 	 */
 	@RequestMapping("/update")
 	@ResponseBody
-	public String update(Girl girl,String girlImgs){
+	public String update(Girl girl,String girlImgs,String categorys){
 		String result = null;
 		try {
-			result = (String) girlService.update(girl, girlImgs);
+			result = (String) girlService.update(girl, girlImgs,categorys);
 		} catch (Exception e) {
 			logger.error("新增或编辑妹纸异常");
 			e.printStackTrace();

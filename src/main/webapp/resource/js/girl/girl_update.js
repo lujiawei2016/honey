@@ -4,6 +4,7 @@ window.onload = function () {
 $(document).ready(function(){
 	
 	var path = $('#path').val();
+	$(".select2").select2();
 	
 	//点击主页图片
 	$(document).on('click','#imgShow',function(){
@@ -68,6 +69,7 @@ $(document).ready(function(){
 	
 	function updateGirl(){
 		var mainImg = $('#mainImg').val();
+		var categorys = $('#categorys').val();
 		var girlImgs = $('#girlImgs').val();
 		var girlId = $('#girlId').val();
 		var girlName = $('#girlName').val();
@@ -87,9 +89,11 @@ $(document).ready(function(){
 			girlId = '0';
 		}
 		
+		alert(categorys+'');
+		
 		$.ajax({
 			url:path+'/girl/update',
-			data:{'mainImg':mainImg,'girlImgs':girlImgs,'girlId':girlId,'girlName':girlName,'age':age,'hight':hight,'weight':weight,'qq':qq,'weixin':weixin,'phone':phone,'price':price,'address':address,'title':title,'description':description,'sort':sort},
+			data:{'mainImg':mainImg,'categorys':categorys+'','girlImgs':girlImgs,'girlId':girlId,'girlName':girlName,'age':age,'hight':hight,'weight':weight,'qq':qq,'weixin':weixin,'phone':phone,'price':price,'address':address,'title':title,'description':description,'sort':sort},
 			dataType:'json',
 			type:'post',
 			beforeSend:function(){

@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -78,7 +80,8 @@ public class Girl implements Serializable {
 	@Column(name="delflag",columnDefinition="INT default 0")
 	private int delflag;                // 删除标志，0-未删除，1-删除
 	
-	@ManyToMany(targetEntity=Category.class,mappedBy="girl")
+	@ManyToMany(targetEntity=Category.class)
+	@JoinTable(name="tb_girl_category",joinColumns={@JoinColumn(name="girl_id")},inverseJoinColumns={@JoinColumn(name="category_id")})
 	@JsonIgnore
 	private Set<Category> category;
 	

@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.weixin.honey.dao.BaseDao;
 import com.weixin.honey.manager.service.GirlService;
+import com.weixin.honey.pojo.Category;
 import com.weixin.honey.pojo.Girl;
 import com.weixin.honey.pojo.GirlImg;
 import com.weixin.honey.util.RedisUtils;
@@ -37,6 +38,9 @@ public class GirlServiceImpl implements GirlService {
 	private BaseDao<GirlImg, Serializable> girlImgDao;
 	
 	@Autowired
+	private BaseDao<Category, Serializable> categoryDao;
+	
+	@Autowired
 	private RedisUtils redisUtils;
 	
 	@Value("${girlListRedis}")
@@ -46,12 +50,32 @@ public class GirlServiceImpl implements GirlService {
 	 * 新增或者更新妹纸
 	 */
 	@Override
-	public Object update(Girl girl, String girlImgs) throws Exception {
+	public Object update(Girl girl, String girlImgs,String categorys) throws Exception {
 		String result = "";
 		Set<GirlImg> girlImgSet = new HashSet<>();
+		Set<Category> categorySet = new HashSet<>();
+		
 		if(girl.getGirlId() == 0){
 			//新增girl
-			girlDao.save(girl);
+			
+			//种类
+			if(!StringUtils.isBlank(categorys)){
+				if(categorys.contains(",")){
+					//该妹纸多个种类
+					String[] categoryArr = categorys.split(",");
+					for(int i=0;i<categoryArr.length;i++){
+						Category category = categoryDao.findById(Category.class, Integer.parseInt(categoryArr[i]));
+						categorySet.add(category);
+					}
+				}else{
+					//该妹纸一个种类
+					Category category = categoryDao.findById(Category.class, Integer.parseInt(categorys));
+					categorySet.add(category);
+				}
+				girl.setCategory(categorySet);
+			}
+			
+			//保存妹纸的图片
 			if(!StringUtils.isBlank(girlImgs) && girlImgs.contains(",")){
 				String girlImgsArr[] = girlImgs.split(",");
 				for(int i=0;i<girlImgsArr.length;i++){
@@ -60,9 +84,10 @@ public class GirlServiceImpl implements GirlService {
 					girlImgSet.add(girlImg);
 				}
 			}
-			
 			girl.setGirlImg(girlImgSet);
-			girlDao.update(girl);
+			
+			//保存
+			girlDao.save(girl);
 			logger.info("新增妹纸成功");
 			result = "1";
 		}else{

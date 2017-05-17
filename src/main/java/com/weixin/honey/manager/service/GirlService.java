@@ -14,10 +14,11 @@ public interface GirlService {
 	 * 新增或者更新妹纸
 	 * @param girl
 	 * @param girlImgs
+	 * @param categorys
 	 * @return
 	 * @throws Exception
 	 */
-	public Object update(Girl girl,String girlImgs) throws Exception;
+	public Object update(Girl girl,String girlImgs,String categorys) throws Exception;
 	
 	/**
 	 * 根据id查找妹纸

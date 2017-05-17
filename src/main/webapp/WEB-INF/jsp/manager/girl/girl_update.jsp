@@ -8,16 +8,17 @@
 <jsp:include page="../../../../resource/resource.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css" href="${ctx}/resource/js/diyUpload/css/webuploader.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/resource/js/diyUpload/css/diyUpload.css">
+<link rel="stylesheet" type="text/css" href="${ctx}/resource/js/select2/select2.css">
 <title>妹纸管理</title>
 <style type="text/css">
 #imgShow{cursor: pointer;}
 #imgdiv{width: 100px;float: left;margin-right: 50px;}
 .checkI{color: green;}
+.select2-selection__choice{background-color: #3c8dbc}
 </style>
 </head>
 <body>
 <input type="hidden" id="path" value="${ctx}" />
-
 <div class="col-md-7 col-md-offset-2">
 	<div class="box box-info">
 	  <div class="box-header with-border">
@@ -52,6 +53,17 @@
 	
 	        <div class="col-sm-10">
 	          <input type="text" class="form-control" id="girlName" name="girlName" placeholder="请输入妹纸名称" value="${girl.girlName}">
+	        </div>
+	      </div>
+	      <div class="form-group">
+	        <label for="categorys" class="col-sm-2 control-label">种类</label>
+	
+	        <div class="col-sm-10">
+	        	<select id="categorys" name="categorys" class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="请选择" style="width: 100%;" tabindex="-1" aria-hidden="true">
+	        		<c:forEach var="category" items="${categoryList}">
+	        			<option value="${category.categoryId}">${category.cateName}</option>
+	        		</c:forEach>
+                 </select>
 	        </div>
 	      </div>
 	      <div class="form-group">
@@ -189,6 +201,7 @@
 <script type="text/javascript" src="${ctx}/resource/js/jquery-validate/jquery.validate-1.13.1.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/uploadPreview/uploadPreview.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/ajaxfileupload/ajaxfileupload.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/select2/select2.full.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/girl/girl_update.js"></script>
 </body>
 </html>
