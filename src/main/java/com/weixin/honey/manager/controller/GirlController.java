@@ -1,10 +1,6 @@
 package com.weixin.honey.manager.controller;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.weixin.honey.manager.service.CategoryService;
 import com.weixin.honey.manager.service.GirlService;
-import com.weixin.honey.pojo.Category;
 import com.weixin.honey.pojo.Girl;
 
 /**
@@ -52,6 +47,26 @@ public class GirlController {
 			e.printStackTrace();
 		}
 		return "manager/girl/girl_list";
+	}
+	
+	/**
+	 * 列出redis中的妹纸
+	 * @param modelMap
+	 * @return
+	 */
+	@RequestMapping("/listRedisGirl")
+	public String listRedisGirl(ModelMap modelMap){
+		List<Girl> girlList = null;
+		try {
+			girlList = (List<Girl>) girlService.findGirlFromRedis(0, -1);
+			if(girlList == null || girlList.size() == 0){
+				girlList = (List<Girl>) girlService.findGirlFromRedis(0, -1);
+			}
+			modelMap.put("girlList", girlList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "manager/girl/girl_redis_list";
 	}
 	
 	/**
@@ -107,6 +122,24 @@ public class GirlController {
 		String result = null;
 		try {
 			result = (String) girlService.deleteGirlImgsById(girlImgId);
+		} catch (Exception e) {
+			logger.error("根据id删除图片异常");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	/**
+	 * 根据id删除妹纸
+	 * @param girlId
+	 * @return
+	 */
+	@RequestMapping("/deleteOrLifelById")
+	@ResponseBody
+	public String deleteOrLifelById(String girlId){
+		String result = "";
+		try {
+			result = (String) girlService.deleteOrLifelById(girlId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

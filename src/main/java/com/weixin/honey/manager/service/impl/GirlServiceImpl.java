@@ -45,6 +45,8 @@ public class GirlServiceImpl implements GirlService {
 	
 	@Value("${girlListRedis}")
 	private String girlListRedis;   // list girl主键
+	
+	private static volatile List<Object> girlList = null;
 
 	/**
 	 * 新增或者更新妹纸
@@ -106,6 +108,7 @@ public class GirlServiceImpl implements GirlService {
 			oldGirl.setTitle(girl.getTitle());
 			oldGirl.setDescription(girl.getDescription());
 			oldGirl.setSort(girl.getSort());
+			
 			if(!StringUtils.isBlank(girlImgs) && girlImgs.contains(",")){
 				String girlImgsArr[] = girlImgs.split(",");
 				for(int i=0;i<girlImgsArr.length;i++){
@@ -114,6 +117,24 @@ public class GirlServiceImpl implements GirlService {
 					girlImgSet.add(girlImg);
 				}
 			}
+			
+			//种类
+			if(!StringUtils.isBlank(categorys)){
+				if(categorys.contains(",")){
+					//该妹纸多个种类
+					String[] categoryArr = categorys.split(",");
+					for(int i=0;i<categoryArr.length;i++){
+						Category category = categoryDao.findById(Category.class, Integer.parseInt(categoryArr[i]));
+						categorySet.add(category);
+					}
+				}else{
+					//该妹纸一个种类
+					Category category = categoryDao.findById(Category.class, Integer.parseInt(categorys));
+					categorySet.add(category);
+				}
+				oldGirl.setCategory(categorySet);
+			}
+			
 			girlDao.update(oldGirl);
 			logger.info("编辑妹纸成功");
 			result = "2";
@@ -159,7 +180,7 @@ public class GirlServiceImpl implements GirlService {
 			bufferHql.append("and g.phone like '%"+girl.getPhone()+"%' ");
 		}
 		
-		bufferHql.append("order by g.sort desc ");
+		bufferHql.append("order by g.sort desc,g.delflag asc ");
 		
 		List<Girl> girlList = girlDao.findByHql(bufferHql.toString());
 		
@@ -175,8 +196,23 @@ public class GirlServiceImpl implements GirlService {
 	 */
 	@Override
 	public Object findGirlFromRedis(long start, long end) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		girlList = redisUtils.getList(girlListRedis, start, end);
+		if(girlList == null || girlList.size() == 0){
+			//redis中没有妹纸，需要从数据看中查出并放入到redis中
+			synchronized (GirlServiceImpl.class) {
+				logger.info("正在查询妹纸放入到数据库中");
+				if(girlList == null || girlList.size() == 0){
+					String hql = "from Girl g where g.delflag=0 order by g.sort asc";
+					girlList = girlDao.findByHql(hql);
+					for(Object obj:girlList){
+						redisUtils.setList(girlListRedis, obj);
+					}
+					logger.info("全部妹纸已经放入redis中");
+					girlList = redisUtils.getList(girlListRedis, start, end);
+				}
+			}
+		}
+		return girlList;
 	}
 
 	/**
@@ -193,6 +229,36 @@ public class GirlServiceImpl implements GirlService {
 				logger.info("删除图片成功");
 			}
 		}
+		return result;
+	}
+
+	/**
+	 * 删除或者恢复妹纸
+	 */
+	@Override
+	public Object deleteOrLifelById(String girlId) throws Exception {
+		String result = "";
+		if(!StringUtils.isBlank(girlId) && StringUtils.isNumeric(girlId)){
+			Girl girl = girlDao.findById(Girl.class, Integer.parseInt(girlId));
+			if(girl != null){
+				if(girl.getDelflag() == 0){
+					girl.setDelflag(1);
+					girlDao.update(girl);
+					result = "1";
+					logger.info("妹纸删除成功");
+				}else if(girl.getDelflag() == 1){
+					girl.setDelflag(0);
+					girlDao.update(girl);
+					result = "2";
+					logger.info("妹纸复活成功");
+				}
+			}
+		}
+		
+		//移除redis中的列表，待查询时重新排序
+		redisUtils.delete(girlListRedis);
+		logger.info("移除redis中的列表，待查询时重新排序");
+		
 		return result;
 	}
 

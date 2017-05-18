@@ -4,7 +4,6 @@ window.onload = function () {
 $(document).ready(function(){
 	
 	var path = $('#path').val();
-	$(".select2").select2();
 	
 	//点击主页图片
 	$(document).on('click','#imgShow',function(){
@@ -88,8 +87,6 @@ $(document).ready(function(){
 		if(girlId == null || girlId == undefined || girlId==''){
 			girlId = '0';
 		}
-		
-		alert(categorys+'');
 		
 		$.ajax({
 			url:path+'/girl/update',

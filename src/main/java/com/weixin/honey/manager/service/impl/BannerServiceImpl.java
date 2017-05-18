@@ -57,6 +57,7 @@ public class BannerServiceImpl implements BannerService {
 						Banner banner = (Banner) obj;
 						redisUtils.setList(bannerRedis, banner);
 					}
+					logger.info("全部banner已经放入到redis中");
 				}
 			}
 			return bannerList;

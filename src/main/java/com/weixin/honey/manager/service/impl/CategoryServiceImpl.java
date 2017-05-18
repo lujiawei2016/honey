@@ -65,7 +65,9 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public Object updateCategory(Category category) throws Exception {
 		categoryDao.save(category);
+		logger.info("新增种类图标成功");
 		redisUtils.delete(categoryRedis);
+		logger.info("从redis中移除种类图标数据");
 		return "1";
 	}
 
@@ -82,6 +84,9 @@ public class CategoryServiceImpl implements CategoryService {
 				categoryDao.update(category);
 				logger.info("删除种类图标成功");
 				result = "1";
+				
+				redisUtils.delete(categoryRedis);
+				logger.info("从redis中移除种类图标数据");
 			}
 		}
 		return result;

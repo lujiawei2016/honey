@@ -32,7 +32,7 @@
 	    <input type="hidden" name="girlId" id="girlId" value="${girl.girlId}">
 	    <div class="box-body">
 	      <div class="form-group">
-	        <label for="up_img" class="col-sm-2 control-label">主页图片</label>
+	        <label for="up_img" class="col-sm-2 control-label">主页图片(350X350)</label>
 	
 	        <div class="col-sm-10">
 	        	<div id="imgdiv">
@@ -203,5 +203,17 @@
 <script type="text/javascript" src="${ctx}/resource/js/ajaxfileupload/ajaxfileupload.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/select2/select2.full.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/girl/girl_update.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	var selectCategory = $(".select2").select2();
+	var categoryArr = new Array();
+	<c:forEach var="category" items="${girl.category}" varStatus="vs">
+		categoryArr["${vs.index}"] = '${category.categoryId}';
+	</c:forEach>
+	selectCategory.val(categoryArr).trigger('change');
+});
+</script>
+
 </body>
 </html>

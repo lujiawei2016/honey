@@ -52,4 +52,12 @@ public interface GirlService {
 	 * @throws Exception
 	 */
 	public Object deleteGirlImgsById(String girlImgId) throws Exception;
+	
+	/**
+	 * 删除或者恢复妹纸
+	 * @param girlId
+	 * @return
+	 * @throws Exception
+	 */
+	public Object deleteOrLifelById(String girlId) throws Exception;
 }

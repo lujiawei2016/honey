@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.weixin.honey.manager.service.BannerService;
 import com.weixin.honey.manager.service.CategoryService;
+import com.weixin.honey.manager.service.GirlService;
 import com.weixin.honey.pojo.Banner;
 
 /**
@@ -27,6 +28,9 @@ public class MainController {
 	
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+	private GirlService girlService;
 
 	/**
 	 * 跳到主页
@@ -35,17 +39,20 @@ public class MainController {
 	 */
 	@RequestMapping(value="/index",produces="text/json;charset=UTF-8")
 	public String index(ModelMap modelMap){
-		Object bannerList = null;
-		Object categoryList = null;
+		Object bannerList = null;      // 轮播图
+		Object categoryList = null;    // 种类
+		Object girlList = null;        // 妹纸
 		try {
 			bannerList = bannerService.findAllBanner();
 			categoryList = categoryService.findAllCategory();
+			girlList = girlService.findGirlFromRedis(0, 20);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		modelMap.put("bannerList", bannerList);
 		modelMap.put("categoryList", categoryList);
+		modelMap.put("girlList", girlList);
 		
 		return "front/index";
 	}

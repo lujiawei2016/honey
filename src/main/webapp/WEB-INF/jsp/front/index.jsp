@@ -79,54 +79,6 @@
 												</a>
 											</li>
 										</c:forEach>
-										<%-- <li class="icon">
-											<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/bag.html">
-												<span class="icon-circle"><img src="${ctx}/resource/images/main/icon-tuan.png"></span>
-												<span class="icon-desc">红包</span>
-											</a>
-										</li>
-										<li class="icon">
-											<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#">
-												<span class="icon-circle"><img src="${ctx}/resource/images/main/icon-tuan1.png"></span>
-												<span class="icon-desc">签到</span>
-											</a>
-										</li>
-										<li class="icon">
-											<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/new-pd.html">
-												<span class="icon-circle"><img src="${ctx}/resource/images/main/icon-tuan2.png"></span>
-												<span class="icon-desc">新品</span>
-											</a>
-										</li>
-										<li class="icon">
-											<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#">
-												<span class="icon-circle"><img src="${ctx}/resource/images/main/icon-tuan3.png"></span>
-												<span class="icon-desc">团购</span>
-											</a>
-										</li>
-										<li class="icon">
-											<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/classs.html">
-												<span class="icon-circle"><img src="${ctx}/resource/images/main/icon-tuan4.png"></span>
-												<span class="icon-desc">分类</span>
-											</a>
-										</li>
-										<li class="icon">
-											<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/life.html">
-												<span class="icon-circle"><img src="${ctx}/resource/images/main/icon-tuan5.png"></span>
-												<span class="icon-desc">生活</span>
-											</a>
-										</li>
-										<li class="icon">
-											<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#">
-												<span class="icon-circle"><img src="${ctx}/resource/images/main/icon-tuan6.png"></span>
-												<span class="icon-desc">秀秀</span>
-											</a>
-										</li>
-										<li class="icon">
-											<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#">
-												<span class="icon-circle"><img src="${ctx}/resource/images/main/icon-tuan7.png"></span>
-												<span class="icon-desc">达人</span>
-											</a>
-										</li> --%>
 									</ul>
 								</div>
 							</div>

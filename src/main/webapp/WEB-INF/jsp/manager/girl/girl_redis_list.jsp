@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <jsp:include page="../../../../resource/resource.jsp"></jsp:include>
-<title>妹纸列表</title>
+<title>redis妹纸列表</title>
 </head>
 <body>
 <input type="hidden" id="path" value="${ctx}" />
@@ -14,16 +14,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">妹纸列表</h3>
-
-              <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-                  <div class="input-group-btn">
-                    <a type="button" class="btn btn-default" id="add" href="${ctx}/girl/goUpdate"><i class="fa fa-plus"></i> 添加妹纸</a>
-                    <a type="button" class="btn btn-default" id="search" href="javascript:;"><i class="fa fa-search"></i> 搜索妹纸</a>
-                  </div>
-                </div>
-              </div>
+              <h3 class="box-title">redis妹纸列表</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
@@ -51,14 +42,7 @@
 	                  <td>${girl.address}</td>
 	                  <td>${girl.sort}</td>
 	                  <td>
-	                  	<a href="${ctx}/girl/goUpdate?girlId=${girl.girlId}">编辑</a>
-	                  	<input type="hidden" value="${girl.girlId}" />
-	                  	<c:if test="${girl.delflag == 0}">
-	                  		<a href="javascript:;" class="delete">删除</a>
-	                  	</c:if>
-	                  	<c:if test="${girl.delflag == 1}">
-	                  		<a href="javascript:;" class="delete">复活</a>
-	                  	</c:if>
+	                  	<a href="${ctx}/girl/goUpdate?girlId=${girl.girlId}">详情</a>
 	                  </td>
 	                </tr>
                 </c:forEach>
@@ -69,26 +53,5 @@
           <!-- /.box -->
         </div>
       </div>
-      <script type="text/javascript" src="${ctx}/resource/js/girl/girl_list.js"></script>
-      
-      
-      
-      ${girlList.size()%2==0?girlList.size()/2:girlList.size()/2+1}
-      
-      <br/>
-      ---------------------------------------------
-      
-      <c:forEach begin="0" end="${girlList.size()%2==0?girlList.size()/2:girlList.size()/2+1}" varStatus="vs">
-      	${girlList[vs.index].girlName}
-      </c:forEach>
-      
-      <br/>
-      ---------------------------------------------
-      
-      <c:forEach var="girl" items="${girlList}" step="2">
-      	${girl.girlId-1}
-      </c:forEach>
-      
-      
 </body>
 </html>
