@@ -1,6 +1,7 @@
 package com.weixin.honey.manager.service.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -46,7 +47,7 @@ public class GirlServiceImpl implements GirlService {
 	@Value("${girlListRedis}")
 	private String girlListRedis;   // list girl主键
 	
-	private static volatile List<Object> girlList = null;
+	private static volatile List<Object> girlRedisList = null;
 
 	/**
 	 * 新增或者更新妹纸
@@ -196,21 +197,25 @@ public class GirlServiceImpl implements GirlService {
 	 */
 	@Override
 	public Object findGirlFromRedis(long start, long end) throws Exception {
-		girlList = redisUtils.getList(girlListRedis, start, end);
-		if(girlList == null || girlList.size() == 0){
+		girlRedisList = redisUtils.getList(girlListRedis, 0, -1);
+		List<Object> girlList = new ArrayList<>();
+		if(girlRedisList == null || girlRedisList.size() == 0){
 			//redis中没有妹纸，需要从数据看中查出并放入到redis中
 			synchronized (GirlServiceImpl.class) {
 				logger.info("正在查询妹纸放入到数据库中");
-				if(girlList == null || girlList.size() == 0){
+				if(girlRedisList == null || girlRedisList.size() == 0){
 					String hql = "from Girl g where g.delflag=0 order by g.sort asc";
-					girlList = girlDao.findByHql(hql);
-					for(Object obj:girlList){
+					girlRedisList = girlDao.findByHql(hql);
+					for(Object obj:girlRedisList){
 						redisUtils.setList(girlListRedis, obj);
 					}
 					logger.info("全部妹纸已经放入redis中");
-					girlList = redisUtils.getList(girlListRedis, start, end);
 				}
 			}
+		}else{
+			//redis中有妹纸，直接从redis中取出
+			logger.info("redis中有妹纸，直接从redis中取出");
+			girlList = redisUtils.getList(girlListRedis, start, end);
 		}
 		return girlList;
 	}

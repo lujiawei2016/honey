@@ -70,25 +70,5 @@
         </div>
       </div>
       <script type="text/javascript" src="${ctx}/resource/js/girl/girl_list.js"></script>
-      
-      
-      
-      ${girlList.size()%2==0?girlList.size()/2:girlList.size()/2+1}
-      
-      <br/>
-      ---------------------------------------------
-      
-      <c:forEach begin="0" end="${girlList.size()%2==0?girlList.size()/2:girlList.size()/2+1}" varStatus="vs">
-      	${girlList[vs.index].girlName}
-      </c:forEach>
-      
-      <br/>
-      ---------------------------------------------
-      
-      <c:forEach var="girl" items="${girlList}" step="2">
-      	${girl.girlId-1}
-      </c:forEach>
-      
-      
 </body>
 </html>

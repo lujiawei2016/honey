@@ -9,9 +9,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<title>幸福生活</title>
 	<link rel="stylesheet" type="text/css" href="${ctx}/resource/css/ui.css">
+	<link rel="stylesheet" type="text/css" href="${ctx}/resource/css/index.css">
+	<style type="text/css">
+	.loadDiv{width: 100%;height: 16px;line-height: 16px;text-align: center;}
+	</style>
 </head>
 <body>
-
+<input type="hidden" id="path" value="${ctx}">
 <div class="aui-container">
 	<div class="aui-page">
 		<!-- 头部 begin-->
@@ -90,170 +94,39 @@
 		<!-- 分类切换 end -->
 		<div class="devider t-line"></div>
 		<div class="b-line" style="position:relative"></div>
-		<%-- <div class="b-line">
-			<a class="home-inform aui-home-inform" data-href="home-slogan.html" target="navView" rel="slogan">
-				<i class="name icon-inform"></i>
-				<span style="font-size:14px; padding-left:5px">APP新版本上线换一种方式购物</span>
-			</a>
-		</div>
-		<div class="my-car-thumbnail"><img src="${ctx}/resource/images/main/banner-car.jpg"></div> --%>
 
 		<div class="aui-title-h">
 			<h2>大牌热卖</h2>
 		</div>
 		<div class="aui-flex">
 			<div class="aui-flex-item aui-flex-items">
-		<span>
-			<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/page.html"><img src="${ctx}/resource/images/main/b1.jpg"></a>
-		</span>
+				<span>
+					<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/page.html"><img src="${ctx}/resource/images/main/b1.jpg"></a>
+				</span>
 				<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#" class="aui-flex-box">新款上市</a>
 			</div>
 			<div class="aui-flex-item aui-flex-items">
-		<span>
-			<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/page.html"><img src="${ctx}/resource/images/main/b2.jpg"></a>
-		</span>
+				<span>
+					<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/page.html"><img src="${ctx}/resource/images/main/b2.jpg"></a>
+				</span>
 				<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#" class="aui-flex-box">爱美装扮</a>
 
 			</div>
 			<div class="aui-flex-item aui-flex-items">
-		<span>
-			<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/page.html"><img src="${ctx}/resource/images/main/b3.jpg"></a>
-		</span>
+				<span>
+					<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/page.html"><img src="${ctx}/resource/images/main/b3.jpg"></a>
+				</span>
 				<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#" class="aui-flex-box">热潮时代</a>
 			</div>
 		</div>
-		<%-- <div class="aui-title-h">
-			<h2>新品必购</h2>
-		</div>
-		<div class="aui-flex">
-			<div class="aui-flex-item aui-flex-items1">
-		<span>
-			<img src="${ctx}/resource/images/main/xiao1.jpg">
-		</span>
-			</div>
-			<div class="aui-flex-item aui-flex-items1">
-		<span>
-			<img src="${ctx}/resource/images/main/xiao2.jpg">
-		</span>
-
-			</div>
-			<div class="aui-flex-item aui-flex-items1">
-		<span>
-			<img src="${ctx}/resource/images/main/xiao3.jpg">
-		</span>
-
-			</div>
-			<div class="aui-flex-item aui-flex-items1">
-		<span>
-			<img src="${ctx}/resource/images/main/xiao34.jpg">
-		</span>
-
-			</div>
-		</div> --%>
 		<div class="aui-title-h">
 			<h2>新品上架</h2>
 		</div>
-		<div class="aui-flex">
-			<div class="aui-flex-item aui-flex-items1 aui-flex-items2">
-		<span>
-			<img src="${ctx}/resource/images/main/b4.jpg">
-		</span>
-				<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#" class="aui-flex-box">
-					<h2>依依衣舍韩版2017春装新款女装宽松显瘦直筒裤破洞牛仔裤HH5296妠 </h2>
-					<em>￥199.00</em>
-				</a>
-			</div>
-			<div class="aui-flex-item aui-flex-items1 aui-flex-items2">
-		<span>
-			<img src="${ctx}/resource/images/main/b5.jpg">
-		</span>
-				<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#" class="aui-flex-box">
-					<h2>依依衣舍韩版2017春装新款女装宽松显瘦直筒裤破洞牛仔裤HH5296妠 </h2>
-					<em>￥199.00</em>
-				</a>
-			</div>
+		
+		<div class="loadDiv">
+			<img alt="正在加载..." src="${ctx}/resource/images/load.gif">
 		</div>
-		<div class="aui-flex">
-			<div class="aui-flex-item aui-flex-items1 aui-flex-items2">
-		<span>
-			<img src="${ctx}/resource/images/main/b7.jpg">
-		</span>
-				<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/page.html" class="aui-flex-box">
-					<h2>依依衣舍韩版2017春装新款女装宽松显瘦直筒裤破洞牛仔裤HH5296妠 </h2>
-					<em>￥199.00</em>
-				</a>
-			</div>
-			<div class="aui-flex-item aui-flex-items1 aui-flex-items2">
-		<span>
-			<img src="${ctx}/resource/images/main/b6.jpg">
-		</span>
-				<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#" class="aui-flex-box">
-					<h2>依依衣舍韩版2017春装新款女装宽松显瘦直筒裤破洞牛仔裤HH5296妠 </h2>
-					<em>￥199.00</em>
-				</a>
-			</div>
-		</div>
-		<div class="aui-flex">
-			<div class="aui-flex-item aui-flex-items1 aui-flex-items2">
-		<span>
-			<img src="${ctx}/resource/images/main/b8.jpg">
-		</span>
-				<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#" class="aui-flex-box">
-					<h2>依依衣舍韩版2017春装新款女装宽松显瘦直筒裤破洞牛仔裤HH5296妠 </h2>
-					<em>￥199.00</em>
-				</a>
-			</div>
-			<div class="aui-flex-item aui-flex-items1 aui-flex-items2">
-		<span>
-			<img src="${ctx}/resource/images/main/b4.jpg">
-		</span>
-				<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#" class="aui-flex-box">
-					<h2>依依衣舍韩版2017春装新款女装宽松显瘦直筒裤破洞牛仔裤HH5296妠 </h2>
-					<em>￥199.00</em>
-				</a>
-			</div>
-		</div>
-		<div class="aui-flex">
-			<div class="aui-flex-item aui-flex-items1 aui-flex-items2">
-		<span>
-			<img src="${ctx}/resource/images/main/b4.jpg">
-		</span>
-				<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#" class="aui-flex-box">
-					<h2>依依衣舍韩版2017春装新款女装宽松显瘦直筒裤破洞牛仔裤HH5296妠 </h2>
-					<em>￥199.00</em>
-				</a>
-			</div>
-			<div class="aui-flex-item aui-flex-items1 aui-flex-items2">
-		<span>
-			<img src="${ctx}/resource/images/main/b4.jpg">
-		</span>
-				<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#" class="aui-flex-box">
-					<h2>依依衣舍韩版2017春装新款女装宽松显瘦直筒裤破洞牛仔裤HH5296妠 </h2>
-					<em>￥199.00</em>
-				</a>
-			</div>
-		</div>
-		<div class="aui-flex">
-			<div class="aui-flex-item aui-flex-items1 aui-flex-items2">
-		<span>
-			<img src="${ctx}/resource/images/main/b4.jpg">
-		</span>
-				<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#" class="aui-flex-box">
-					<h2>依依衣舍韩版2017春装新款女装宽松显瘦直筒裤破洞牛仔裤HH5296妠 </h2>
-					<em>￥199.00</em>
-				</a>
-			</div>
-			<div class="aui-flex-item aui-flex-items1 aui-flex-items2">
-		<span>
-			<img src="${ctx}/resource/images/main/b4.jpg">
-		</span>
-				<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#" class="aui-flex-box">
-					<h2>依依衣舍韩版2017春装新款女装宽松显瘦直筒裤破洞牛仔裤HH5296妠 </h2>
-					<em>￥199.00</em>
-				</a>
-			</div>
-		</div>
-		<div style="height:44px"></div>
+		<div style="height:44px" class="insertFlag"></div>
 		<div class="tab-bar tab-bottom">
 			<a class="tab-button active" href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html"><i class="tab-button-icon icon icon-home"></i><span class="tab-button-txt">首页</span></a>
 			<a class="tab-button cached" href="http://www.17sucai.com/preview/10221/2017-03-14/show/life.html"><i class="tab-button-icon icon icon-exhibition"></i><span class="tab-button-txt">生活</span></a>
@@ -266,6 +139,7 @@
 
 
 <script type="text/javascript" src="${ctx}/resource/js/jquery/jQuery-2.1.4.min.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/layer.mobile-v2.0/layer.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/main/aui-touchSlide.js"></script>
 <script>
 	/*banner首页轮播*/
@@ -281,7 +155,7 @@
 		switchLoad : "_src" // 切换加载，真实图片路径为"_src"
 	});
 </script>
-<script src="${ctx}/resource/js/main/aui-swipe.js" type="text/javascript" charset="utf-8"></script>
-
+<script type="text/javascript" src="${ctx}/resource/js/main/aui-swipe.js" charset="utf-8"></script>
+<script type="text/javascript" src="${ctx}/resource/js/index/index.js"></script>
 
 </body></html>
