@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="${ctx}/resource/css/ui.css">
 	<link rel="stylesheet" type="text/css" href="${ctx}/resource/css/index.css">
 	<style type="text/css">
-	.loadDiv{width: 100%;height: 16px;line-height: 16px;text-align: center;}
+	.loadDiv{width: 100%;height: 32px;line-height: 32px;text-align: center;}
 	</style>
 </head>
 <body>
