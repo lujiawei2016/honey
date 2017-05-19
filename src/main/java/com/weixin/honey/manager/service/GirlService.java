@@ -60,4 +60,12 @@ public interface GirlService {
 	 * @throws Exception
 	 */
 	public Object deleteOrLifelById(String girlId) throws Exception;
+	
+	/**
+	 * 根据妹纸id查出相应图片
+	 * @param girlId
+	 * @return
+	 * @throws Exception
+	 */
+	public Object findGirlImgsByGirlId(String girlId) throws Exception;
 }

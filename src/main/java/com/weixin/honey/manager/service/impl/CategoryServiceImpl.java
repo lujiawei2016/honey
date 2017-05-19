@@ -92,4 +92,16 @@ public class CategoryServiceImpl implements CategoryService {
 		return result;
 	}
 
+	/**
+	 * 根据id查找图标
+	 */
+	@Override
+	public Object findCategoryById(String categoryId) throws Exception {
+		Category category = null;
+		if(!StringUtils.isBlank(categoryId) && StringUtils.isNumeric(categoryId)){
+			category = categoryDao.findById(Category.class, Integer.parseInt(categoryId));
+		}
+		return category;
+	}
+
 }

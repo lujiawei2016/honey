@@ -16,6 +16,7 @@
 </head>
 <body>
 <input type="hidden" id="path" value="${ctx}">
+<input type="hidden" id="returnFlag" value="1">
 <div class="aui-container">
 	<div class="aui-page">
 		<!-- 头部 begin-->
@@ -77,7 +78,7 @@
 									<ul class="icon-list">
 										<c:forEach var="category" items="${categoryList}">
 											<li class="icon">
-												<a href="javascript:;">
+												<a href="${ctx}/categoryDetail/listGirlCategory/${category.categoryId}">
 													<span class="icon-circle"><img src="${ctx}/${category.imgUrl}"></span>
 													<span class="icon-desc">${category.cateName}</span>
 												</a>
@@ -128,7 +129,7 @@
 		</div>
 		<div style="height:44px" class="insertFlag"></div>
 		<div class="tab-bar tab-bottom">
-			<a class="tab-button active" href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html"><i class="tab-button-icon icon icon-home"></i><span class="tab-button-txt">首页</span></a>
+			<a class="tab-button active" href="${ctx}/main/index"><i class="tab-button-icon icon icon-home"></i><span class="tab-button-txt">首页</span></a>
 			<a class="tab-button cached" href="http://www.17sucai.com/preview/10221/2017-03-14/show/life.html"><i class="tab-button-icon icon icon-exhibition"></i><span class="tab-button-txt">生活</span></a>
 			<a class="tab-button cached" href="http://www.17sucai.com/preview/10221/2017-03-14/show/classs.html"><i class="tab-button-icon icon icon-service"></i><span class="tab-button-txt">分类</span></a>
 			<a class="tab-button cached" href="http://www.17sucai.com/preview/10221/2017-03-14/show/car.html"><i class="tab-button-icon icon icon-car"></i><span class="tab-button-txt">购物车</span></a>

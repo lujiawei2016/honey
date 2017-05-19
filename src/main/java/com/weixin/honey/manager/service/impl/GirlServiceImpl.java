@@ -47,6 +47,12 @@ public class GirlServiceImpl implements GirlService {
 	@Value("${girlListRedis}")
 	private String girlListRedis;   // list girl主键
 	
+	@Value("${girlSingleRedis}")
+	private String girlSingleRedis;
+	
+	@Value("${girlImgsRedis}")
+	private String girlImgsRedis;
+	
 	private static volatile List<Object> girlRedisList = null;
 
 	/**
@@ -156,8 +162,7 @@ public class GirlServiceImpl implements GirlService {
 		Girl girl = null;
 		if(!StringUtils.isBlank(girlId) && StringUtils.isNumeric(girlId)){
 			girl = girlDao.findById(Girl.class, Integer.parseInt(girlId));
-		}else{
-			logger.info("girlId为空");
+			logger.info("根据girlId("+girlId+")查出妹纸");
 		}
 		return girl;
 	}
@@ -229,9 +234,14 @@ public class GirlServiceImpl implements GirlService {
 		if(!StringUtils.isBlank(girlImgId) && StringUtils.isNumeric(girlImgId)){
 			GirlImg girlImg = girlImgDao.findById(GirlImg.class, Integer.parseInt(girlImgId));
 			if(girlImg != null){
+				
+				int girlId = girlImg.getGirl().getGirlId();
+				
 				girlImgDao.delete(girlImg);
+				redisUtils.delete(girlImgsRedis+girlId);
+				
 				result = "1";
-				logger.info("删除图片成功");
+				logger.info("删除妹纸图片成功");
 			}
 		}
 		return result;
@@ -250,7 +260,10 @@ public class GirlServiceImpl implements GirlService {
 					girl.setDelflag(1);
 					girlDao.update(girl);
 					result = "1";
-					logger.info("妹纸删除成功");
+					
+					redisUtils.delete(girlSingleRedis+girlId);
+					
+					logger.info("妹纸删除成功并将redis中移除");
 				}else if(girl.getDelflag() == 1){
 					girl.setDelflag(0);
 					girlDao.update(girl);
@@ -265,6 +278,19 @@ public class GirlServiceImpl implements GirlService {
 		logger.info("移除redis中的列表，待查询时重新排序");
 		
 		return result;
+	}
+
+	/**
+	 * 根据妹纸id查出相应图片
+	 */
+	@Override
+	public Object findGirlImgsByGirlId(String girlId) throws Exception {
+		List<GirlImg> girlImgList = new ArrayList<>();
+		if(!StringUtils.isBlank(girlId) && StringUtils.isNumeric(girlId)){
+			String hql = "from GirlImg g where g.girl.girlId="+Integer.parseInt(girlId)+"";
+			girlImgList = girlImgDao.findByHql(hql);
+		}
+		return girlImgList;
 	}
 
 }

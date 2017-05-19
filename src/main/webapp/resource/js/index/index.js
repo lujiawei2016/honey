@@ -15,6 +15,7 @@ $(document).ready(function(){
 			type:'post',
 			beforeSend:function(){
 				$('.loadDiv').show();
+				$('#returnFlag').val('0');
 			},
 			success:function(result){
 				$('.loadDiv').hide();
@@ -25,6 +26,7 @@ $(document).ready(function(){
 					    skin: 'msg',
 					    time: 2 //2秒后自动关闭
 					  });
+					$('#returnFlag').val('1');
 				}else{
 					var insertData = '';
 					for(var i=0;i<loadGirlLen;i++){
@@ -36,7 +38,7 @@ $(document).ready(function(){
 								'<span>'+
 									'<img src="'+path+'/'+result[i].mainImg+'">'+
 								'</span>'+
-								'<a href="javascript:;" class="aui-flex-box">'+
+								'<a href="'+path+'/detail/girlDetail/'+result[i].girlId+'" class="aui-flex-box">'+
 									'<h2>'+result[i].title+' </h2>'+
 									'<em>￥'+result[i].price+'</em>'+
 								'</a>'+
@@ -48,7 +50,7 @@ $(document).ready(function(){
 								'<span>'+
 									'<img src="'+path+'/'+result[i].mainImg+'">'+
 								'</span>'+
-								'<a href="javascript:;" class="aui-flex-box">'+
+								'<a href="'+path+'/detail/girlDetail/'+result[i].girlId+'" class="aui-flex-box">'+
 									'<h2>'+result[i].title+' </h2>'+
 									'<em>￥'+result[i].price+'</em>'+
 								'</a>'+
@@ -62,6 +64,7 @@ $(document).ready(function(){
 						insertData = insertData + '</div>';
 					}
 					
+					$('#returnFlag').val('1');
 					$('.loadDiv').before(insertData);
 				}
 			},
@@ -71,10 +74,19 @@ $(document).ready(function(){
 		});
 	}
 	
+	//点击详情的图片
+	$(document).on('click','.girlDetailDiv',function(){
+		var hrefUrl = $(this).find('a').attr('href');
+		window.location.href=hrefUrl;
+	});
+	
 	//滚动到最底部
 	$(window).scroll(function() {
 		if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
-			loadGirl();
+			var returnFlag = $('#returnFlag').val();
+			if('1' == returnFlag){
+				loadGirl();
+			}
 		}
 	});
 });

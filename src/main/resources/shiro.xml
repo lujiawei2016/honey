@@ -30,11 +30,10 @@
 				<!-- 静态资源 -->
 				/resource/** = anon
 				
-				<!-- 登录页面不需要验证 -->
-				/loginView/** = anon
-				
-				<!-- 主页 -->
-				/main/** = anon
+				/loginView/** = anon     <!-- 登录页面不需要验证 -->
+				/main/** = anon          <!-- 主页不需要验证 -->
+				/detail/** = anon        <!-- 详情页不需要验证 -->
+				/categoryDetail/** = anon <!-- 跳到种类页面不需要验证 -->
 				
 				<!-- authc需要认证 -->
 				/** = authc

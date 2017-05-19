@@ -33,4 +33,12 @@ public interface CategoryService {
 	 */
 	public Object deleteCategory(String categoryId) throws Exception;
 	
+	/**
+	 * 根据id查找图标
+	 * @param categoryId
+	 * @return
+	 * @throws Exception
+	 */
+	public Object findCategoryById(String categoryId) throws Exception;
+	
 }
