@@ -13,5 +13,5 @@ public interface CategoryDetailService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Object getCategoryGirlByCategoryId(String categoryId) throws Exception;
+	public Object getCategoryGirlByCategoryId(String categoryId,long start, long end) throws Exception;
 }

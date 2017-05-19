@@ -78,7 +78,7 @@
 									<ul class="icon-list">
 										<c:forEach var="category" items="${categoryList}">
 											<li class="icon">
-												<a href="${ctx}/categoryDetail/listGirlCategory/${category.categoryId}">
+												<a href="${ctx}/categoryDetail/listGirlCategory/${category.categoryId}/0/19">
 													<span class="icon-circle"><img src="${ctx}/${category.imgUrl}"></span>
 													<span class="icon-desc">${category.cateName}</span>
 												</a>

@@ -37,8 +37,8 @@
                 </tr>
                 <c:forEach var="category" items="${categoryList}" varStatus="vs">
                 	<tr>
-	                  <td>${vs.index}</td>
-	                  <td><img alt="${category.cateName}" src="${ctx}/${category.imgUrl}"> </td>
+	                  <td>${vs.index+1}</td>
+	                  <td><img alt="${category.cateName}" src="${ctx}/${category.imgUrl}" width="70"> </td>
 	                  <td>${category.cateName}</td>
 	                  <td>${category.sort}</td>
 	                  <td><a href="javascript:;" class="delete">删除</a> <input type="hidden" value="${category.categoryId}" /></td>

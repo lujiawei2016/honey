@@ -60,6 +60,7 @@ public class GirlController {
 		try {
 			girlList = (List<Girl>) girlService.findGirlFromRedis(0, -1);
 			if(girlList == null || girlList.size() == 0){
+				logger.info("第一次从redis中获取妹纸失败，再次获取");
 				girlList = (List<Girl>) girlService.findGirlFromRedis(0, -1);
 			}
 			modelMap.put("girlList", girlList);

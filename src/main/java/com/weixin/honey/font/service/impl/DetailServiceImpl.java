@@ -1,5 +1,6 @@
 package com.weixin.honey.font.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.weixin.honey.font.service.DetailService;
 import com.weixin.honey.manager.service.GirlService;
 import com.weixin.honey.pojo.Girl;
-import com.weixin.honey.pojo.GirlImg;
 import com.weixin.honey.util.RedisUtils;
 
 /**
@@ -40,6 +40,8 @@ public class DetailServiceImpl implements DetailService {
 	
 	@Autowired
 	private GirlService girlService;
+	
+	private static volatile List<Object> objList = new ArrayList<>();
 	
 	/**
 	 * 根据id得到girl
@@ -69,15 +71,23 @@ public class DetailServiceImpl implements DetailService {
 		}
 		
 		//将妹纸的相关图片查出
+		List<Object> girlImgList = new ArrayList<>();
 		if(girl != null){
-			List<Object> girlImgList = redisUtils.getList(girlImgsRedis+girlId, 0, -1);
-			if(girlImgList == null || girlImgList.size() == 0){
-				//当redis中没有妹纸的相关图片时，从数据看中查出相关图片放入到redis中
-				logger.info("redis中没有妹纸的相关图片，从数据看中查出相关图片放入到redis中");
-				girlImgList = (List<Object>) girlService.findGirlImgsByGirlId(girlId);
-				for(Object girlImg:girlImgList){
-					redisUtils.setList(girlImgsRedis+girlId, girlImg);
+			objList = redisUtils.getList(girlImgsRedis+girlId, 0, -1);
+			if(objList == null || objList.size() == 0){
+				synchronized (DetailServiceImpl.class) {
+					if(objList == null || objList.size() == 0){
+						logger.info("redis中没有妹纸的相关图片，从数据看中查出相关图片放入到redis中");
+						girlImgList = (List<Object>) girlService.findGirlImgsByGirlId(girlId);
+						objList = girlImgList;
+						for(Object girlImg:girlImgList){
+							redisUtils.setList(girlImgsRedis+girlId, girlImg);
+						}
+					}
 				}
+			}else{
+				girlImgList = redisUtils.getList(girlImgsRedis+girlId, 0, -1);
+				logger.info("redis中有妹纸的相关图片，直接从redis中取出");
 			}
 			
 			dataMap.put("girl", girl);

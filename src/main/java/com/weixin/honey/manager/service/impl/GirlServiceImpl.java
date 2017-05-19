@@ -3,6 +3,7 @@ package com.weixin.honey.manager.service.impl;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -53,6 +54,9 @@ public class GirlServiceImpl implements GirlService {
 	@Value("${girlImgsRedis}")
 	private String girlImgsRedis;
 	
+	@Value("${categoryGirlRedis}")
+	private String categoryGirlRedis;
+	
 	private static volatile List<Object> girlRedisList = null;
 
 	/**
@@ -75,11 +79,17 @@ public class GirlServiceImpl implements GirlService {
 					for(int i=0;i<categoryArr.length;i++){
 						Category category = categoryDao.findById(Category.class, Integer.parseInt(categoryArr[i]));
 						categorySet.add(category);
+						
+						redisUtils.delete(categoryGirlRedis+categoryArr[i]);
+						logger.info("新增妹纸的时候将原来的种类移除");
 					}
 				}else{
 					//该妹纸一个种类
 					Category category = categoryDao.findById(Category.class, Integer.parseInt(categorys));
 					categorySet.add(category);
+					
+					redisUtils.delete(categoryGirlRedis+categorys);
+					logger.info("新增妹纸的时候将原来的种类移除");
 				}
 				girl.setCategory(categorySet);
 			}
@@ -133,12 +143,28 @@ public class GirlServiceImpl implements GirlService {
 					for(int i=0;i<categoryArr.length;i++){
 						Category category = categoryDao.findById(Category.class, Integer.parseInt(categoryArr[i]));
 						categorySet.add(category);
+						
+						redisUtils.delete(categoryGirlRedis+categoryArr[i]);
+						logger.info("编辑妹纸的时将所属的种类移除");
 					}
 				}else{
 					//该妹纸一个种类
 					Category category = categoryDao.findById(Category.class, Integer.parseInt(categorys));
 					categorySet.add(category);
+					
+					redisUtils.delete(categoryGirlRedis+categorys);
+					logger.info("编辑妹纸的时将所属的种类移除");
 				}
+				
+				//需要将原来的所属种类全部移除
+				logger.info("编辑妹纸时需将原来的种类全部移除");
+				Set<Category> oldCategorySet = oldGirl.getCategory();
+				Iterator<Category> categoryIter = oldCategorySet.iterator();
+				while(categoryIter.hasNext()){
+					int categoryId = categoryIter.next().getCategoryId();
+					redisUtils.delete(categoryGirlRedis+categoryId);
+				}
+				
 				oldGirl.setCategory(categorySet);
 			}
 			

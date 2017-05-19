@@ -3,6 +3,7 @@ package com.weixin.honey.font.controller;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +25,8 @@ import com.weixin.honey.pojo.Girl;
 @Controller
 @RequestMapping("/main")
 public class MainController {
+	
+	private static final Logger logger = Logger.getLogger(MainController.class);
 	
 	@Autowired
 	private BannerService bannerService;
@@ -67,9 +70,10 @@ public class MainController {
 		List<Girl> girlList = null;
 		if(!StringUtils.isBlank(start) && StringUtils.isNumeric(start)){
 			try {
-				girlList = (List<Girl>) girlService.findGirlFromRedis(Integer.parseInt(start), Integer.parseInt(start)+9);
+				girlList = (List<Girl>) girlService.findGirlFromRedis(Integer.parseInt(start), Integer.parseInt(start)+19);
 				if(girlList == null || girlList.size() == 0){
-					girlList = (List<Girl>) girlService.findGirlFromRedis(Integer.parseInt(start), Integer.parseInt(start)+9);
+					logger.info("第一次从redis中获取妹纸失败，再次获取");
+					girlList = (List<Girl>) girlService.findGirlFromRedis(Integer.parseInt(start), Integer.parseInt(start)+19);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
