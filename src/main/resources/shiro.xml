@@ -34,6 +34,7 @@
 				/main/** = anon          <!-- 主页不需要验证 -->
 				/detail/** = anon        <!-- 详情页不需要验证 -->
 				/categoryDetail/** = anon <!-- 跳到种类页面不需要验证 -->
+				/vip/** = anon           <!-- 跳到VIP页面不需要验证 -->
 				
 				<!-- authc需要认证 -->
 				/** = authc
