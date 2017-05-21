@@ -50,7 +50,7 @@ public class GirlController {
 	}
 	
 	/**
-	 * 列出redis中的妹纸
+	 * 列出普通redis中的妹纸
 	 * @param modelMap
 	 * @return
 	 */
@@ -62,6 +62,27 @@ public class GirlController {
 			if(girlList == null || girlList.size() == 0){
 				logger.info("第一次从redis中获取妹纸失败，再次获取");
 				girlList = (List<Girl>) girlService.findGirlFromRedis(0, -1);
+			}
+			modelMap.put("girlList", girlList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "manager/girl/girl_redis_list";
+	}
+	
+	/**
+	 * 列出VIP redis中的妹纸
+	 * @param modelMap
+	 * @return
+	 */
+	@RequestMapping("/listVIPRedisGirl")
+	public String listVIPRedisGirl(ModelMap modelMap){
+		List<Girl> girlList = null;
+		try {
+			girlList = (List<Girl>) girlService.findVipGirlFromRedis(0, -1);
+			if(girlList == null || girlList.size() == 0){
+				logger.info("第一次从redis中获VIP取妹纸失败，再次获取");
+				girlList = (List<Girl>) girlService.findVipGirlFromRedis(0, -1);
 			}
 			modelMap.put("girlList", girlList);
 		} catch (Exception e) {

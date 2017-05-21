@@ -91,14 +91,21 @@
         </property>
     </bean>
     
-    <!-- 配置需要拦截的地址 -->
+    <!-- 后台配置需要拦截的地址 -->
     <mvc:interceptors>
+    	<!-- 后台 -->
     	<mvc:interceptor>
     		<mvc:mapping path="/index/**"/>
     		<mvc:mapping path="/roles/**"/>
     		<mvc:mapping path="/permission/**"/>
-    		<mvc:mapping path="/user/**"/>    		
+    		<mvc:mapping path="/user/**"/>
     		<bean class="com.weixin.honey.interceptor.SessionInterceptor"></bean>
+    	</mvc:interceptor>
+
+		<!-- 前台 -->    	
+    	<mvc:interceptor>
+    		<mvc:mapping path="/car/**"/>
+    		<bean class="com.weixin.honey.interceptor.FontInterceptor"></bean>
     	</mvc:interceptor>
     </mvc:interceptors>
     

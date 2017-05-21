@@ -5,87 +5,27 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>VIP专区</title>
+    <title>高端</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <link rel="stylesheet" type="text/css" href="${ctx}/resource/js/swiper/swiper.min.css">
     <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/vip.css">
 </head>
 <body>
     <header class="mui-bar mui-bar-nav aui-header b-line">
-        <h1 class="mui-title">VIP专区</h1>
+        <h1 class="mui-title">高端</h1>
     </header>
     <div class="mui-title-text">
         <p>绿色公益 权威发布</p>
     </div>
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" style="background-image:url(${ctx}/resource/images/${ctx}/resource/images/img/1.jpg)">
-                <a href="#" target="_blank">
-                    <h1>周杰伦</h1>
-                </a>
-            </div>
-            <div class="swiper-slide" style="background-image:url(${ctx}/resource/images/img/2.jpg)">
-                <a href="#" target="b">
-                    <h1>潘玮柏</h1>
-                </a>
-            </div>
-            <div class="swiper-slide" style="background-image:url(${ctx}/resource/images/img/3.jpg)">
-                <a href="#">
-                    <h1>林俊杰</h1>
-                </a>
-            </div>
-            <div class="swiper-slide" style="background-image:url(${ctx}/resource/images/img/4.jpg)">
-                <a href="#">
-                    <h1>王力宏</h1>
-                </a>
-            </div>
-            <div class="swiper-slide" style="background-image:url(${ctx}/resource/images/img/5.jpg)">
-                <a href="#">
-                    <h1>张信哲</h1>
-                </a>
-            </div>
-            <div class="swiper-slide" style="background-image:url(${ctx}/resource/images/img/6.jpg)">
-                <a href="#">
-                    <h1>陈奕迅</h1>
-                </a>
-            </div>
-            <div class="swiper-slide" style="background-image:url(${ctx}/resource/images/img/7.jpg)">
-                <a href="#">
-                    <h1>吴克群</h1>
-                </a>
-            </div>
-            <div class="swiper-slide" style="background-image:url(${ctx}/resource/images/img/8.jpg)">
-                <a href="#">
-                    <h1>薛之谦</h1>
-                </a>
-            </div>
-            <div class="swiper-slide" style="background-image:url(${ctx}/resource/images/img/9.jpg)">
-                <a href="#">
-                    <h1>陈楚生</h1>
-                </a>
-            </div>
-            <div class="swiper-slide" style="background-image:url(${ctx}/resource/images/img/10.jpg)">
-                <a href="#">
-                    <h1>筷子兄弟</h1>
-                </a>
-            </div>
-
-            <div class="swiper-slide" style="background-image:url(${ctx}/resource/images/img/20.jpg)">
-                <a href="#">
-                    <h1>范冰冰</h1>
-                </a>
-            </div>
-            <div class="swiper-slide" style="background-image:url(${ctx}/resource/images/img/21.jpg)">
-                <a href="#">
-                    <h1>刘诗诗</h1>
-                </a>
-            </div>
-            <div class="swiper-slide" style="background-image:url(${ctx}/resource/images/img/22.jpg)">
-                <a href="#">
-                    <h1>唐嫣</h1>
-                </a>
-            </div>
-
+        	<c:forEach var="girl" items="${girlList}">
+	            <div class="swiper-slide" style="background-image:url(${ctx}/${girl.mainImg})">
+	                <a href="${ctx}/detail/girlDetail/${girl.girlId}" target="_blank">
+	                    <h1>${girl.girlName}</h1>
+	                </a>
+	            </div>
+            </c:forEach>
         </div>
     </div>
     
@@ -97,15 +37,15 @@
             </a>
             <a href="javascript:;" class="aui-tab-item mui-active">
                 <span class="mui-icon mui-icon-extra mui-icon-extra-class"></span>
-                <span class="mui-tab-label">VIP专区</span>
+                <span class="mui-tab-label">高端</span>
             </a>
             <a class="aui-tab-item" href="#">
                 <span class="mui-icon mui-icon-extra mui-icon-extra-cart"></span>
                 <span class="mui-tab-label">绿色商城</span>
             </a>
-            <a class="aui-tab-item" href="#">
+            <a class="aui-tab-item" href="${ctx}/car/listCar">
                 <span class="mui-icon mui-icon-extra mui-icon-extra-news"></span>
-                <span class="mui-tab-label">消息</span>
+                <span class="mui-tab-label">备战区</span>
             </a>
             <a class="aui-tab-item" href="#">
                 <span class="mui-icon mui-icon-extra mui-icon-extra-people"></span>

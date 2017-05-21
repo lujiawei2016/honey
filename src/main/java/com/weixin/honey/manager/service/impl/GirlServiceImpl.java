@@ -48,6 +48,9 @@ public class GirlServiceImpl implements GirlService {
 	@Value("${girlListRedis}")
 	private String girlListRedis;   // list girl主键
 	
+	@Value("${girlVipListRedis}")
+	private String girlVipListRedis;
+	
 	@Value("${girlSingleRedis}")
 	private String girlSingleRedis;
 	
@@ -57,7 +60,9 @@ public class GirlServiceImpl implements GirlService {
 	@Value("${categoryGirlRedis}")
 	private String categoryGirlRedis;
 	
-	private static volatile List<Object> girlRedisList = null;
+	private static volatile List<Object> girlRedisList = new ArrayList<>();
+	
+	private static volatile List<Object> girlVipRedisList = new ArrayList<>();
 
 	/**
 	 * 新增或者更新妹纸
@@ -125,6 +130,7 @@ public class GirlServiceImpl implements GirlService {
 			oldGirl.setTitle(girl.getTitle());
 			oldGirl.setDescription(girl.getDescription());
 			oldGirl.setSort(girl.getSort());
+			oldGirl.setIsVip(girl.getIsVip());
 			
 			if(!StringUtils.isBlank(girlImgs) && girlImgs.contains(",")){
 				String girlImgsArr[] = girlImgs.split(",");
@@ -175,6 +181,7 @@ public class GirlServiceImpl implements GirlService {
 		
 		//移除redis中的列表，待查询时重新排序
 		redisUtils.delete(girlListRedis);
+		redisUtils.delete(girlVipListRedis);
 		logger.info("移除redis中的列表，待查询时重新排序");
 		
 		return result;
@@ -220,7 +227,7 @@ public class GirlServiceImpl implements GirlService {
 	}
 
 	/**
-	 * 从redis查出妹纸
+	 * 从redis查出普通妹纸
 	 * @param start
 	 * @param end
 	 * @return
@@ -235,18 +242,45 @@ public class GirlServiceImpl implements GirlService {
 			synchronized (GirlServiceImpl.class) {
 				logger.info("正在查询妹纸放入到数据库中");
 				if(girlRedisList == null || girlRedisList.size() == 0){
-					String hql = "from Girl g where g.delflag=0 order by g.sort asc";
+					String hql = "from Girl g where g.delflag=0 and g.isVip=0 order by g.sort asc";
 					girlRedisList = girlDao.findByHql(hql);
 					for(Object obj:girlRedisList){
 						redisUtils.setList(girlListRedis, obj);
 					}
-					logger.info("全部妹纸已经放入redis中");
+					logger.info("全部普通妹纸已经放入redis中");
 				}
 			}
 		}else{
 			//redis中有妹纸，直接从redis中取出
-			logger.info("redis中有妹纸，直接从redis中取出");
+			logger.info("redis中有普通妹纸，直接从redis中取出");
 			girlList = redisUtils.getList(girlListRedis, start, end);
+		}
+		return girlList;
+	}
+	
+	/**
+	 * 从redis总查出VIP妹纸
+	 */
+	@Override
+	public Object findVipGirlFromRedis(long start, long end) throws Exception {
+		girlVipRedisList = redisUtils.getList(girlVipListRedis, 0, -1);
+		List<Object> girlList = new ArrayList<>();
+		if(girlVipRedisList == null || girlVipRedisList.size() == 0){
+			synchronized (GirlServiceImpl.class) {
+				if(girlVipRedisList == null || girlVipRedisList.size() == 0){
+					//redis中没有VIP妹纸，需要从数据库中查出
+					logger.info("正在数据库中查出VIP妹纸放入到数据库中");
+					String hql = "from Girl g where g.delflag=0 and g.isVip=1 order by g.sort asc";
+					girlVipRedisList = girlDao.findByHql(hql);
+					for(Object obj:girlVipRedisList){
+						redisUtils.setList(girlVipListRedis, obj);
+					}
+					logger.info("全部VIP妹纸已经放入到redis中");
+				}
+			}
+		}else{
+			logger.info("redis中有VIP妹纸，直接从redis中取出");
+			girlList = redisUtils.getList(girlVipListRedis, start, end);
 		}
 		return girlList;
 	}

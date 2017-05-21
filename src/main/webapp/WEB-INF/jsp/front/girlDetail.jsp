@@ -123,11 +123,11 @@
 			<div class="aui-li">
 				<a href="javascript:;" class="aui-icon-gz"></a>
 				<a href="javascript:;"></a>
-				<a href="javascript:;" class="aui-icon-gw"></a>
+				<a href="${ctx}/car/listCar" class="aui-icon-gw"></a>
 			</div>
 		</div>
-		<div class=""><a href="javascript:;" class="aui-car-all">加入购物车</a></div>
-		<div class=""><a href="http://www.17sucai.com/preview/10221/2017-03-14/show/car.html" class="aui-car-lli">立即购买</a></div>
+		<div class=""><a href="javascript:;" class="aui-car-all fighting">加入备战区</a></div>
+		<div class=""><a href="${ctx}/car/listCar" class="aui-car-lli">查看备战区</a></div>
 	</div>
 
 </footer>

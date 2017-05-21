@@ -67,6 +67,9 @@ $(document).ready(function(){
 		$('.preSaleDiv').show();
 	});
 	
-	
+	//点击加入备战区
+	$(document).on('click','.fighting',function(){
+		
+	});
 	
 });

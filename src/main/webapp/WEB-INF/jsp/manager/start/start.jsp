@@ -202,7 +202,8 @@
                 <li><a href="${ctx}/banner/listBanner" target="windowFrame">banner管理</a></li>
                 <li><a href="${ctx}/category/listCategory" target="windowFrame">icon管理</a></li>
                 <li><a href="${ctx}/girl/listGirlPage" target="windowFrame">数据库妹纸</a></li>
-                <li><a href="${ctx}/girl/listRedisGirl" target="windowFrame">redis妹纸</a></li>
+                <li><a href="${ctx}/girl/listRedisGirl" target="windowFrame">普通redis妹纸</a></li>
+                <li><a href="${ctx}/girl/listVIPRedisGirl" target="windowFrame">高端redis妹纸</a></li>
               </ul>
             </li>
           </ul><!-- /.sidebar-menu -->

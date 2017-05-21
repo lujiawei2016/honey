@@ -137,6 +137,16 @@
 	        </div>
 	      </div>
 	      <div class="form-group">
+	        <label for="isVip" class="col-sm-2 control-label">是否高端</label>
+	        <div class="col-sm-10">
+	        	<select id="isVip" name="isVip" class="form-control">
+	        		<option selected="selected" value="">--请选择--</option>
+	        		<option value="0">非高端</option>
+		          	<option value="1">高端</option>
+		         </select>
+	        </div>
+	      </div>
+	      <div class="form-group">
 	        <label for="sort" class="col-sm-2 control-label">排序</label>
 	
 	        <div class="col-sm-10">

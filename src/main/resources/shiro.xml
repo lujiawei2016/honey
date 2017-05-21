@@ -27,17 +27,23 @@
 		<!-- 过虑器链定义，从上向下顺序执行，一般将/**放在最下边 -->
 		<property name="filterChainDefinitions">
 			<value>
-				<!-- 静态资源 -->
-				/resource/** = anon
+				<!-- /resource/** = anon -->      <!-- 静态资源不需要验证 -->
 				
-				/loginView/** = anon     <!-- 登录页面不需要验证 -->
-				/main/** = anon          <!-- 主页不需要验证 -->
-				/detail/** = anon        <!-- 详情页不需要验证 -->
-				/categoryDetail/** = anon <!-- 跳到种类页面不需要验证 -->
-				/vip/** = anon           <!-- 跳到VIP页面不需要验证 -->
+				<!-- /loginView/** = anon -->     <!-- 登录页面不需要验证 -->
+				<!-- /main/** = anon -->          <!-- 主页不需要验证 -->
+				<!-- /detail/** = anon -->        <!-- 详情页不需要验证 -->
+				<!-- /categoryDetail/** = anon --> <!-- 跳到种类页面不需要验证 -->
+				<!-- /vip/** = anon -->           <!-- 跳到VIP页面不需要验证 -->
 				
 				<!-- authc需要认证 -->
-				/** = authc
+				/banner/** = authc
+				/category/** = authc
+				/girl/** = authc
+				/index/** = authc
+				/permission/** = authc
+				/roles/** = authc
+				/upload/** = authc
+				/user/** = authc
 				
 			</value>
 		</property>

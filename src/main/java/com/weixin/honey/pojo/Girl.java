@@ -76,6 +76,9 @@ public class Girl implements Serializable {
 	@Column(name="sort")
 	private int sort;                   // 排序
 	
+	@Column(name="isVip",nullable=false,columnDefinition="INT default 0")
+	private int isVip;               // 是否高端   0-非高端；1-高端
+	
 	@Column(name="delflag",columnDefinition="INT default 0")
 	private int delflag;                // 删除标志，0-未删除，1-删除
 	
@@ -236,6 +239,14 @@ public class Girl implements Serializable {
 
 	public void setSort(int sort) {
 		this.sort = sort;
+	}
+	
+	public int getIsVip() {
+		return isVip;
+	}
+
+	public void setIsVip(int isVip) {
+		this.isVip = isVip;
 	}
 
 	public int getPrice() {

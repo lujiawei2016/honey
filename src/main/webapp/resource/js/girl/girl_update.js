@@ -82,6 +82,7 @@ $(document).ready(function(){
 		var address = $('#address').val();
 		var title = $('#title').val();
 		var description = $('#description').val();
+		var isVip = $('#isVip').val();
 		var sort = $('#sort').val();
 		
 		if(girlId == null || girlId == undefined || girlId==''){
@@ -90,7 +91,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			url:path+'/girl/update',
-			data:{'mainImg':mainImg,'categorys':categorys+'','girlImgs':girlImgs,'girlId':girlId,'girlName':girlName,'age':age,'hight':hight,'weight':weight,'qq':qq,'weixin':weixin,'phone':phone,'price':price,'address':address,'title':title,'description':description,'sort':sort},
+			data:{'mainImg':mainImg,'categorys':categorys+'','girlImgs':girlImgs,'girlId':girlId,'girlName':girlName,'age':age,'hight':hight,'weight':weight,'qq':qq,'weixin':weixin,'phone':phone,'price':price,'address':address,'title':title,'description':description,'sort':sort,'isVip':isVip},
 			dataType:'json',
 			type:'post',
 			beforeSend:function(){
@@ -153,6 +154,21 @@ $(document).ready(function(){
 				min:1,
 				number:true
 			},
+			isVip:{
+				required:true
+			},
+			age:{
+				number:true,
+				min:0
+			},
+			hight:{
+				number:true,
+				min:0
+			},
+			price:{
+				number:true,
+				min:0
+			}
 		},
 		messages:{
 			mainImg:{
@@ -172,6 +188,21 @@ $(document).ready(function(){
 				min:'数字必须大于1',
 				number:'数字必须大于1'
 			},
+			isVip:{
+				required:'请选择是否高端'
+			},
+			age:{
+				number:'年龄必须输入合法的数字',
+				min:'年龄不能小于0'
+			},
+			hight:{
+				number:'身高必须输入合法的数字',
+				min:'身高不能小于0'
+			},
+			price:{
+				number:'价格必须输入合法数字',
+				min:'价格不能小于0'
+			}
 		},
 		showErrors : function(errorMap, errorList) {
 			var msg = "";

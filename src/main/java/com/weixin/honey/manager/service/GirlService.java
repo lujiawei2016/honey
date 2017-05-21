@@ -37,13 +37,22 @@ public interface GirlService {
 	public Object findGirlFromDatabase(Girl girl) throws Exception;
 	
 	/**
-	 * 从redis中查出妹纸
+	 * 从redis中查出普通妹纸
 	 * @param start 从start开始查
 	 * @param end   end条结束
 	 * @return
 	 * @throws Exception
 	 */
 	public Object findGirlFromRedis(long start, long end) throws Exception;
+	
+	/**
+	 * 从redis总查出VIP妹纸
+	 * @param start
+	 * @param end
+	 * @return
+	 * @throws Exception
+	 */
+	public Object findVipGirlFromRedis(long start, long end) throws Exception;
 	
 	/**
 	 * 删除图片
