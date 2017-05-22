@@ -1,6 +1,7 @@
 package com.weixin.honey.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -13,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Cascade;
@@ -39,6 +42,10 @@ public class User implements Serializable {
 	
 	@Column(name="password",nullable=false)
 	private String password;
+	
+	@Column(name="createTime")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createTime;
 	
 	@ManyToMany(targetEntity=Roles.class,cascade={javax.persistence.CascadeType.MERGE,javax.persistence.CascadeType.PERSIST})
 	@JoinTable(name="tb_user_roles",joinColumns={@JoinColumn(name="user_id")},inverseJoinColumns={@JoinColumn(name="roles_id")})
@@ -89,14 +96,24 @@ public class User implements Serializable {
 	public void setComments(Set<Comments> comments) {
 		this.comments = comments;
 	}
+	
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
 	public User() {
 		super();
 	}
 
-	public User(String username, String password) {
+	public User(String username, String password, Date createTime) {
 		super();
 		this.username = username;
 		this.password = password;
+		this.createTime = createTime;
 	}
+	
 }

@@ -15,12 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public class FontInterceptor implements HandlerInterceptor {
 	
-	@Value("${userSession}")
+	@Value("user")
 	private String userSession;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		Object obj = request.getSession(true).getAttribute(userSession);
+		Object obj = request.getSession().getAttribute(userSession);
 		
 		if(obj == null){
 			//登陆过期

@@ -54,6 +54,7 @@ $(document).ready(function(){
 	
 	//一开始隐藏售前须知
 	$('.preSaleDiv').hide();
+	var path = $('#path').val();
 	
 	//点击商品详细
 	$(document).on('click','.goodsDetail',function(){
@@ -69,6 +70,7 @@ $(document).ready(function(){
 	
 	//点击加入备战区
 	$(document).on('click','.fighting',function(){
+		var girlId = $('#girlId').val();
 		
 	});
 	

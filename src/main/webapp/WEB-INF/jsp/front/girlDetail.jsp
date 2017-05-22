@@ -10,6 +10,8 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/girlDetail.css">
 </head>
 <body class="item">
+<input type="hidden" id="path" value="${ctx}" />
+<input type="hidden" id="girlId" value="${dataMap.girl.girlId}">
 <div class="header">
 	<div class="" style="background:none"></div>
 	<div class="toolbar statusbar-padding">

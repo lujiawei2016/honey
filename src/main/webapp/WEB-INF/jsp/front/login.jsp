@@ -14,7 +14,8 @@
 </head>
 
 <body>
-
+<input type="hidden" id="path" value="${ctx}" />
+<input type="hidden" id="referer" value="${referer}" />
 <div class="cont">
   <div class="demo">
     <div class="login">
@@ -24,13 +25,13 @@
           <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
             <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
           </svg>
-          <input type="text" class="login__input name" placeholder="请输入用户名"/>
+          <input type="text" name="username" id="username" class="login__input name" placeholder="请输入用户名"/>
         </div>
         <div class="login__row">
           <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
             <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
           </svg>
-          <input type="password" class="login__input pass" placeholder="请输入密码"/>
+          <input type="password" name="password" id="password" class="login__input pass" placeholder="请输入密码"/>
         </div>
         <button type="button" class="login__submit">登 录</button>
         <p class="login__signup">还没有账号？ &nbsp;<a href="${ctx}/userLogin/registerUser">立刻注册</a></p>
@@ -41,6 +42,7 @@
 
 
 <script type="text/javascript" src='${ctx}/resource/js/jquery/jQuery-2.1.4.min.js'></script>
-
+<script type="text/javascript" src="${ctx}/resource/js/layer.mobile-v2.0/layer.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/fontlogin/login.js"></script>
 </body>
 </html>
