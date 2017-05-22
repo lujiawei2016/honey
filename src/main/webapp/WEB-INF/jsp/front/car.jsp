@@ -30,96 +30,23 @@
 			</div>
 			<div class="main_con_goods">
 				<ul>
-					<li>
-						<section class="aui-crl">
-							<span class="circle"></span>
-							<img src="${ctx}/resource/images/main/b4.jpg">
-						</section>
-						<div style="width: 1199px; padding-left: 10px;">
-							<h2>2017春装新款时尚女装宽松贴布开衫针织衫NG5836</h2>
-							<p class="aui-o">颜色分类:黑色,尺码:M</p>
-							<p class="money"><em class="aui-redd">60￥</em>
-								<input class="add" type="button" value="">
-								<input class="num" type="number" value="1">
-								<input class="del" type="button" value="">
-							</p>
-						</div>
-					</li>
-					<li>
-						<section class="aui-crl">
-							<span class="circle"></span>
-							<img src="${ctx}/resource/images/main/b5.jpg">
-						</section>
-						<div style="width: 1199px; padding-left: 10px;">
-							<h2>2017春装新款时尚女装宽松贴布开衫针织衫NG5836</h2>
-							<p class="aui-o">颜色分类:黑色,尺码:M</p>
-							<p class="money"><em class="aui-redd">230￥</em>
-								<input class="add" type="button" value="">
-								<input class="num" type="number" value="1">
-								<input class="del" type="button" value="">
-							</p>
-						</div>
-					</li>
-					<li>
-						<section class="aui-crl">
-							<span class="circle"></span>
-							<img src="${ctx}/resource/images/main/b6.jpg">
-						</section>
-						<div style="width: 1199px; padding-left: 10px;">
-							<h2>2017春装新款时尚女装宽松贴布开衫针织衫NG5836</h2>
-							<p class="aui-o">颜色分类:黑色,尺码:M</p>
-							<p class="money"><em class="aui-redd">260￥</em>
-								<input class="add" type="button" value="">
-								<input class="num" type="number" value="1">
-								<input class="del" type="button" value="">
-							</p>
-						</div>
-					</li>
-					<li>
-						<section class="aui-crl">
-							<span class="circle"></span>
-							<img src="${ctx}/resource/images/main/b7.jpg">
-						</section>
-						<div style="width: 1199px; padding-left: 10px;">
-							<h2>2017春装新款时尚女装宽松贴布开衫针织衫NG5836</h2>
-							<p class="aui-o">颜色分类:黑色,尺码:M</p>
-							<p class="money"><em class="aui-redd">60￥</em>
-								<input class="add" type="button" value="">
-								<input class="num" type="number" value="1">
-								<input class="del" type="button" value="">
-							</p>
-						</div>
-					</li>
-					<li>
-						<section class="aui-crl">
-							<span class="circle"></span>
-							<img src="${ctx}/resource/images/main/b8.jpg">
-						</section>
-						<div style="width: 1199px; padding-left: 10px;">
-							<h2>2017春装新款时尚女装宽松贴布开衫针织衫NG5836</h2>
-							<p class="aui-o">颜色分类:黑色,尺码:M</p>
-							<p class="money"><em class="aui-redd">450￥</em>
-								<input class="add" type="button" value="">
-								<input class="num" type="number" value="1">
-								<input class="del" type="button" value="">
-							</p>
-						</div>
-					</li>
-					<li>
-						<section class="aui-crl">
-							<span class="circle"></span>
-							<img src="${ctx}/resource/images/main/b4.jpg">
-						</section>
-						<div style="width: 1199px; padding-left: 10px;">
-							<h2>2017春装新款时尚女装宽松贴布开衫针织衫NG5836</h2>
-							<p class="aui-o">颜色分类:黑色,尺码:M</p>
-							<p class="money"><em class="aui-redd">90￥</em>
-								<input class="add" type="button" value="">
-								<input class="num" type="number" value="1">
-								<input class="del" type="button" value="">
-							</p>
-						</div>
-					</li>
+					<c:forEach var="girl" items="${carList}">
+						<li>
+							<section class="aui-crl">
+								<span class="circle"></span>
+								<img src="${ctx}/${girl.mainImg}">
+							</section>
+							<div style="width: 1199px; padding-left: 10px;">
+								<h2>${girl.title}</h2>
+								<p class="aui-o">年龄:${girl.age},身高:${girl.hight}</p>
+								<p class="money"><em class="aui-redd">${girl.price}￥</em>
+									<input class="add" type="button" value="">
+									<input class="num" type="number" value="1">
+									<input class="del" type="button" value="">
+								</p>
+							</div>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>

@@ -51,7 +51,7 @@ $(document).ready(function(){
 					});
 					setTimeout(function(){
 						var referer = $('#referer').val();
-						if(referer != null){
+						if(referer != null && referer != ''){
 							window.location.href=referer;
 						}else{
 							window.location.href=path+'/main/index';

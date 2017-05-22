@@ -128,13 +128,14 @@
 				<a href="${ctx}/car/listCar" class="aui-icon-gw"></a>
 			</div>
 		</div>
-		<div class=""><a href="javascript:;" class="aui-car-all fighting">加入备战区</a></div>
+		<div class="fighting"><a href="javascript:;" class="aui-car-all">加入备战区</a></div>
 		<div class=""><a href="${ctx}/car/listCar" class="aui-car-lli">查看备战区</a></div>
 	</div>
 
 </footer>
 
 <script type="text/javascript" src="${ctx}/resource/js/jquery/jQuery-2.1.4.min.js"></script>
+<script type="text/javascript" src="${ctx}/resource/js/layer.mobile-v2.0/layer.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/main/swiper.min.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/main/jquery.lazyload.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/main/aui-touchSlide.js"></script>

@@ -27,6 +27,7 @@ public class FontInterceptor implements HandlerInterceptor {
 			String headerX = request.getHeader("X-Requested-With");
 			if(headerX != null && "XMLHttpRequest".equals(headerX)){
 				response.getWriter().write("ajaxIsTimeOut");
+				response.setHeader("sessionstatus", "timeout");
 				return false;
 			}else{
 				response.sendRedirect(request.getContextPath()+"/userLogin/loginGirl");

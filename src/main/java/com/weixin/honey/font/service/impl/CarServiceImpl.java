@@ -49,14 +49,16 @@ public class CarServiceImpl implements CarService {
 		List<Object> carList = new ArrayList<>();
 		carList = redisUtils.getList(carRedis+userId, 0, -1);
 		if(carList == null || carList.size() == 0){
-			logger.info("该用户在redis备战区中没有妹纸，需要从redis中取出");
+			logger.info("该用户("+userId+")在redis备战区中没有妹纸，需要从数据库中取出并放入到redis中");
 			String hql = "from Car c where c.userId="+userId+" and c.delflag=0";
-			carList = carDao.findByHql(hql);
-			for(Object obj:carList){
-				redisUtils.setList(carRedis+userId, obj);
+			List<Car> carDateList = carDao.findByHql(hql);
+			for(Car car:carDateList){
+				Girl girl = girlDao.findById(Girl.class, car.getGirlId());
+				redisUtils.setList(carRedis+userId, girl);
 			}
+			carList = redisUtils.getList(carRedis+userId, start, end);
 		}else{
-			logger.info("该用户在redis备战区中有妹纸，直接从redis中取出");
+			logger.info("该用户("+userId+")在redis备战区中有妹纸，直接从redis中取出");
 			carList = redisUtils.getList(carRedis+userId, start, end);
 		}
 		return carList;
@@ -69,12 +71,23 @@ public class CarServiceImpl implements CarService {
 	public Object addCar(int userId, String girlId) throws Exception {
 		String result = "0";
 		if(!StringUtils.isBlank(girlId) && StringUtils.isNumeric(girlId)){
+			//判断备战区中是否已经存在妹纸
+			List<Object> girlList = redisUtils.getList(carRedis+userId, 0, -1);
+			for(Object obj:girlList){
+				Girl g = (Girl) obj;
+				if(g.getGirlId() == Integer.parseInt(girlId)){
+					//redis中已经存在该妹纸，不需要重复加入
+					logger.info("备战区已经存在该妹纸，不需要重复加入");
+					return "2";
+				}
+			}
+			
 			Girl girl = girlDao.findById(Girl.class, Integer.parseInt(girlId));
 			if(girl != null){
 				Car car = new Car(userId, girl.getGirlId());
 				carDao.save(car);
 				
-				redisUtils.setList(carRedis+userId, car);
+				redisUtils.setList(carRedis+userId, girl);
 				
 				result = "1";
 				logger.info("用户("+userId+")加入备战区成功");

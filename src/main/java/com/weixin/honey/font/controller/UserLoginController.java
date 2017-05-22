@@ -2,6 +2,7 @@ package com.weixin.honey.font.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,7 +32,11 @@ public class UserLoginController {
 	@RequestMapping(value="/loginGirl")
 	public String loginGirl(HttpServletRequest request,ModelMap modelMap){
 		String referer = request.getHeader("referer"); //获得上次的访问路径
-		modelMap.put("referer", referer);
+		if(StringUtils.isBlank(referer) || referer.contains("registerUser") || referer.contains("loginGirl")){
+			modelMap.put("referer", "");
+		}else{
+			modelMap.put("referer", referer);
+		}
 		return "front/login";
 	}
 	
