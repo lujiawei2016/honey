@@ -297,6 +297,20 @@
 		    <version>2.5.2</version>
 		</dependency>
 		
+		<!-- dom4j -->
+		<dependency>
+		    <groupId>dom4j</groupId>
+		    <artifactId>dom4j</artifactId>
+		    <version>1.6.1</version>
+		</dependency>
+		
+		<!-- xstream -->
+		<dependency>
+		    <groupId>com.thoughtworks.xstream</groupId>
+		    <artifactId>xstream</artifactId>
+		    <version>1.4.3</version>
+		</dependency>
+		
 	</dependencies>
   
   <build>
