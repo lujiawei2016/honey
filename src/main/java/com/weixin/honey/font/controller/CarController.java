@@ -65,4 +65,23 @@ public class CarController {
 		}
 		return result;
 	}
+
+	/**
+	 * 删除购物车
+	 * @param girlIds
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/deleteCar")
+	@ResponseBody
+	public Object deleteCar(String girlIds,HttpServletRequest request){
+		Object result = "";
+		User user = (User) request.getSession().getAttribute(userSession);
+		try {
+			result = carService.deleteCar(girlIds, user.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

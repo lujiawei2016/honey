@@ -39,7 +39,7 @@
                 <span class="mui-icon mui-icon-extra mui-icon-extra-class"></span>
                 <span class="mui-tab-label">高端</span>
             </a>
-            <a class="aui-tab-item" href="#">
+            <a class="aui-tab-item" href="javascript:;">
                 <span class="mui-icon mui-icon-extra mui-icon-extra-cart"></span>
                 <span class="mui-tab-label">绿色商城</span>
             </a>
@@ -47,7 +47,7 @@
                 <span class="mui-icon mui-icon-extra mui-icon-extra-news"></span>
                 <span class="mui-tab-label">备战区</span>
             </a>
-            <a class="aui-tab-item" href="#">
+            <a class="aui-tab-item" href="${ctx}/my/myInfo">
                 <span class="mui-icon mui-icon-extra mui-icon-extra-people"></span>
                 <span class="mui-tab-label">我的</span>
             </a>

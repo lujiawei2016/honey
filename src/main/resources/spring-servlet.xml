@@ -105,6 +105,7 @@
 		<!-- 前台 -->    	
     	<mvc:interceptor>
     		<mvc:mapping path="/car/**"/>
+    		<mvc:mapping path="/my/**"/>
     		<bean class="com.weixin.honey.interceptor.FontInterceptor"></bean>
     	</mvc:interceptor>
     </mvc:interceptors>

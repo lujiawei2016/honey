@@ -27,9 +27,10 @@ public interface CarService {
 	public Object addCar(int userId,String girlId) throws Exception;
 	
 	/**
-	 * 
+	 * 删除备战区
 	 * @return
 	 * @throws Exception
 	 */
-	public Object deleteCar(String carIds) throws Exception;
+	public Object deleteCar(String girlIds,int userId) throws Exception;
+	
 }

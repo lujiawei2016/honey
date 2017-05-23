@@ -1,9 +1,13 @@
 package com.weixin.honey.font.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,18 +28,30 @@ public class UserLoginController {
 	
 	@Autowired
 	private UserLoginService userLoginService;
+	
+	@Value("user")
+	private String userSession;
 
 	/**
 	 * 跳到登录页面
 	 * @return
 	 */
 	@RequestMapping(value="/loginGirl")
-	public String loginGirl(HttpServletRequest request,ModelMap modelMap){
-		String referer = request.getHeader("referer"); //获得上次的访问路径
-		if(StringUtils.isBlank(referer) || referer.contains("registerUser") || referer.contains("loginGirl")){
-			modelMap.put("referer", "");
+	public String loginGirl(HttpServletRequest request,HttpServletResponse response,ModelMap modelMap){
+		Object user = request.getSession().getAttribute(userSession);
+		if(user != null){
+			try {
+				response.sendRedirect(request.getContextPath()+"/main/index");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}else{
-			modelMap.put("referer", referer);
+			String referer = request.getHeader("referer"); //获得上次的访问路径
+			if(StringUtils.isBlank(referer) || referer.contains("registerUser") || referer.contains("loginGirl")){
+				modelMap.put("referer", "");
+			}else{
+				modelMap.put("referer", referer);
+			}
 		}
 		return "front/login";
 	}
@@ -45,7 +61,12 @@ public class UserLoginController {
 	 * @return
 	 */
 	@RequestMapping(value="/registerUser")
-	public String registerUser(){
+	public String registerUser(HttpServletResponse response,HttpServletRequest request){
+		try {
+			response.sendRedirect(request.getContextPath()+"/main/index");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return "front/register";
 	}
 
@@ -83,5 +104,16 @@ public class UserLoginController {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	/**
+	 * 退出账号
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/exitUser")
+	public Object exitUser(HttpServletRequest request,HttpServletResponse response){
+		request.getSession().removeAttribute(userSession);
+		return "redirect:/main/index";
 	}
 }

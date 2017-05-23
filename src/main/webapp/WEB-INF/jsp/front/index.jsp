@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
-<!-- saved from url=(0082)http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
 	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
@@ -26,7 +25,7 @@
 				<div class="header-title" style="height:50px; padding:0 50px">
 					<div class="title aui-title-input"><input type="text" placeholder="秋季新品"></div>
 				</div>
-				<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/news.html">
+				<a href="javascript:;">
 					<button class="icon aui-icon-mag"></button>
 				</a>
 			</div>
@@ -101,22 +100,22 @@
 		<div class="aui-flex">
 			<div class="aui-flex-item aui-flex-items">
 				<span>
-					<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/page.html"><img src="${ctx}/resource/images/main/b1.jpg"></a>
+					<a href="javascript:;"><img src="${ctx}/resource/images/main/b1.jpg"></a>
 				</span>
-				<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#" class="aui-flex-box">新款上市</a>
+				<a href="javascript:;" class="aui-flex-box">新款上市</a>
 			</div>
 			<div class="aui-flex-item aui-flex-items">
 				<span>
-					<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/page.html"><img src="${ctx}/resource/images/main/b2.jpg"></a>
+					<a href="javascript:;"><img src="${ctx}/resource/images/main/b2.jpg"></a>
 				</span>
-				<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#" class="aui-flex-box">爱美装扮</a>
+				<a href="javascript:;" class="aui-flex-box">爱美装扮</a>
 
 			</div>
 			<div class="aui-flex-item aui-flex-items">
 				<span>
-					<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/page.html"><img src="${ctx}/resource/images/main/b3.jpg"></a>
+					<a href="javascript:;"><img src="${ctx}/resource/images/main/b3.jpg"></a>
 				</span>
-				<a href="http://www.17sucai.com/preview/10221/2017-03-14/show/index.html?from=singlemessage#" class="aui-flex-box">热潮时代</a>
+				<a href="javascript:;" class="aui-flex-box">热潮时代</a>
 			</div>
 		</div>
 		<div class="aui-title-h">
@@ -132,7 +131,7 @@
 			<a class="tab-button cached" href="${ctx}/vip/listVip"><i class="tab-button-icon icon icon-exhibition"></i><span class="tab-button-txt">高端</span></a>
 			<a class="tab-button cached" href="${ctx}/car/listCar"><i class="tab-button-icon icon icon-service"></i><span class="tab-button-txt">分类</span></a>
 			<a class="tab-button cached" href="${ctx}/car/listCar"><i class="tab-button-icon icon icon-car"></i><span class="tab-button-txt">备战区</span></a>
-			<a class="tab-button cached" href="http://www.17sucai.com/preview/10221/2017-03-14/show/me.html"><i class="tab-button-icon icon icon-my"></i><span class="tab-button-txt">我的</span></a>
+			<a class="tab-button cached" href="${ctx}/my/myInfo"><i class="tab-button-icon icon icon-my"></i><span class="tab-button-txt">我的</span></a>
 		</div>
 	</div>
 </div>

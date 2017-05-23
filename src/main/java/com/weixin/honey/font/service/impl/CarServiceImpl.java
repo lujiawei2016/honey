@@ -100,11 +100,33 @@ public class CarServiceImpl implements CarService {
 	 * 删除备战区
 	 */
 	@Override
-	public Object deleteCar(String carIds) throws Exception {
-		if(!StringUtils.isBlank(carIds)){
-			
+	public Object deleteCar(String girlIds, int userId) throws Exception {
+		String result = "0";
+		if(!StringUtils.isBlank(girlIds) && girlIds.contains(",")){
+			String girlIdArr[] = girlIds.split(",");
+			for(int i=0;i<girlIdArr.length;i++){
+				Girl girl = girlDao.findById(Girl.class, Integer.parseInt(girlIdArr[i]));
+				if(girl != null){
+					logger.info("用户("+userId+")需要删除备战区妹纸");
+					String carHql = "from Car c where c.girlId="+Integer.parseInt(girlIdArr[i])+" and c.userId="+userId+"";
+					List<Car> carList = carDao.findByHql(carHql);
+					for(Car car:carList){
+						
+						//删除妹纸
+						car.setDelflag(1);
+						carDao.update(car);
+						
+						//移除redis中数据
+						redisUtils.removeList(carRedis+userId, 1, girl);
+						
+						logger.info("用户("+userId+")删除备战区妹纸成功");
+						
+						result = "1";
+					}
+				}
+			}
 		}
-		return null;
+		return result;
 	}
 
 }
