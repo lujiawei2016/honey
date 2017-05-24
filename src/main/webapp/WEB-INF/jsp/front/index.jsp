@@ -98,25 +98,14 @@
 			<h2>大牌热卖</h2>
 		</div>
 		<div class="aui-flex">
-			<div class="aui-flex-item aui-flex-items">
-				<span>
-					<a href="javascript:;"><img src="${ctx}/resource/images/main/b1.jpg"></a>
-				</span>
-				<a href="javascript:;" class="aui-flex-box">新款上市</a>
-			</div>
-			<div class="aui-flex-item aui-flex-items">
-				<span>
-					<a href="javascript:;"><img src="${ctx}/resource/images/main/b2.jpg"></a>
-				</span>
-				<a href="javascript:;" class="aui-flex-box">爱美装扮</a>
-
-			</div>
-			<div class="aui-flex-item aui-flex-items">
-				<span>
-					<a href="javascript:;"><img src="${ctx}/resource/images/main/b3.jpg"></a>
-				</span>
-				<a href="javascript:;" class="aui-flex-box">热潮时代</a>
-			</div>
+			<c:forEach var="girl" items="${activityGirlList}">
+				<div class="aui-flex-item aui-flex-items">
+					<span>
+						<a href="${ctx}/detail/girlDetail/${girl.girlId}"><img src="${ctx}/${girl.mainImg}"></a>
+					</span>
+					<a href="javascript:;" class="aui-flex-box">${girl.girlName}</a>
+				</div>
+			</c:forEach>
 		</div>
 		<div class="aui-title-h">
 			<h2>新品上架</h2>
@@ -129,7 +118,7 @@
 		<div class="tab-bar tab-bottom">
 			<a class="tab-button active" href="javascript:;"><i class="tab-button-icon icon icon-home"></i><span class="tab-button-txt">首页</span></a>
 			<a class="tab-button cached" href="${ctx}/vip/listVip"><i class="tab-button-icon icon icon-exhibition"></i><span class="tab-button-txt">高端</span></a>
-			<a class="tab-button cached" href="${ctx}/car/listCar"><i class="tab-button-icon icon icon-service"></i><span class="tab-button-txt">分类</span></a>
+			<a class="tab-button cached" href="${ctx}/contactUs/contact"><i class="tab-button-icon icon icon-service"></i><span class="tab-button-txt">联系我们</span></a>
 			<a class="tab-button cached" href="${ctx}/car/listCar"><i class="tab-button-icon icon icon-car"></i><span class="tab-button-txt">备战区</span></a>
 			<a class="tab-button cached" href="${ctx}/my/myInfo"><i class="tab-button-icon icon icon-my"></i><span class="tab-button-txt">我的</span></a>
 		</div>

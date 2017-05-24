@@ -141,8 +141,18 @@
 	        <div class="col-sm-10">
 	        	<select id="isVip" name="isVip" class="form-control">
 	        		<option selected="selected" value="">--请选择--</option>
-	        		<option value="0">非高端</option>
-		          	<option value="1">高端</option>
+	        		<option value="0" <c:if test="${girl.isVip==0}">selected="selected"</c:if>>非高端</option>
+		          	<option value="1" <c:if test="${girl.isVip==1}">selected="selected"</c:if>>高端</option>
+		         </select>
+	        </div>
+	      </div>
+	      <div class="form-group">
+	        <label for="isActivity" class="col-sm-2 control-label">是否活动</label>
+	        <div class="col-sm-10">
+	        	<select id="isActivity" name="isActivity" class="form-control">
+	        		<option selected="selected" value="">--请选择--</option>
+	        		<option value="0" <c:if test="${girl.isActivity==0}">selected="selected"</c:if>>非活动</option>
+		          	<option value="1" <c:if test="${girl.isActivity==1}">selected="selected"</c:if>>活动</option>
 		         </select>
 	        </div>
 	      </div>

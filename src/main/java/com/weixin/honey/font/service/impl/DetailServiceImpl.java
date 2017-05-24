@@ -41,14 +41,14 @@ public class DetailServiceImpl implements DetailService {
 	@Autowired
 	private GirlService girlService;
 	
-	private static volatile List<Object> objList = new ArrayList<>();
+	private static volatile List<Object> objList = new ArrayList<Object>();
 	
 	/**
 	 * 根据id得到girl
 	 */
 	@Override
 	public Object getGirl(String girlId) throws Exception {
-		Map<String, Object> dataMap = new HashMap<>();
+		Map<String, Object> dataMap = new HashMap<String, Object>();
 		Girl girl = null;
 		if(!StringUtils.isBlank(girlId) && StringUtils.isNumeric(girlId)){
 			Object redisGirl = redisUtils.getValue(girlSingleRedis+girlId);
@@ -71,7 +71,7 @@ public class DetailServiceImpl implements DetailService {
 		}
 		
 		//将妹纸的相关图片查出
-		List<Object> girlImgList = new ArrayList<>();
+		List<Object> girlImgList = new ArrayList<Object>();
 		if(girl != null){
 			objList = redisUtils.getList(girlImgsRedis+girlId, 0, -1);
 			if(objList == null || objList.size() == 0){

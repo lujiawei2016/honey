@@ -82,6 +82,9 @@ public class Girl implements Serializable {
 	@Column(name="delflag",columnDefinition="INT default 0")
 	private int delflag;                // 删除标志，0-未删除，1-删除
 	
+	@Column(name="isActivity",columnDefinition="INT default 0")
+	private int isActivity;             // 是否是活动妹纸，0-否，1-是
+	
 	@ManyToMany(targetEntity=Category.class)
 	@JoinTable(name="tb_girl_category",joinColumns={@JoinColumn(name="girl_id")},inverseJoinColumns={@JoinColumn(name="category_id")})
 	@JsonIgnore
@@ -256,7 +259,13 @@ public class Girl implements Serializable {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	
-	
+
+	public int getIsActivity() {
+		return isActivity;
+	}
+
+	public void setIsActivity(int isActivity) {
+		this.isActivity = isActivity;
+	}
 	
 }

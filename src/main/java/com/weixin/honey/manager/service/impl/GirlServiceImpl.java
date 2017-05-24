@@ -60,9 +60,14 @@ public class GirlServiceImpl implements GirlService {
 	@Value("${categoryGirlRedis}")
 	private String categoryGirlRedis;
 	
-	private static volatile List<Object> girlRedisList = new ArrayList<>();
+	@Value("${girlActiveRedis}")
+	private String girlActiveRedis;
 	
-	private static volatile List<Object> girlVipRedisList = new ArrayList<>();
+	private static volatile List<Object> girlRedisList = new ArrayList<Object>();
+	
+	private static volatile List<Object> girlVipRedisList = new ArrayList<Object>();
+	
+	private static volatile List<Object> girlActiveRedisList = new ArrayList<Object>();
 
 	/**
 	 * 新增或者更新妹纸
@@ -70,8 +75,8 @@ public class GirlServiceImpl implements GirlService {
 	@Override
 	public Object update(Girl girl, String girlImgs,String categorys) throws Exception {
 		String result = "";
-		Set<GirlImg> girlImgSet = new HashSet<>();
-		Set<Category> categorySet = new HashSet<>();
+		Set<GirlImg> girlImgSet = new HashSet<GirlImg>();
+		Set<Category> categorySet = new HashSet<Category>();
 		
 		if(girl.getGirlId() == 0){
 			//新增girl
@@ -131,6 +136,7 @@ public class GirlServiceImpl implements GirlService {
 			oldGirl.setDescription(girl.getDescription());
 			oldGirl.setSort(girl.getSort());
 			oldGirl.setIsVip(girl.getIsVip());
+			oldGirl.setIsActivity(girl.getIsActivity());
 			
 			if(!StringUtils.isBlank(girlImgs) && girlImgs.contains(",")){
 				String girlImgsArr[] = girlImgs.split(",");
@@ -182,6 +188,7 @@ public class GirlServiceImpl implements GirlService {
 		//移除redis中的列表，待查询时重新排序
 		redisUtils.delete(girlListRedis);
 		redisUtils.delete(girlVipListRedis);
+		redisUtils.delete("girlActiveRedis");
 		logger.info("移除redis中的列表，待查询时重新排序");
 		
 		return result;
@@ -236,7 +243,7 @@ public class GirlServiceImpl implements GirlService {
 	@Override
 	public Object findGirlFromRedis(long start, long end) throws Exception {
 		girlRedisList = redisUtils.getList(girlListRedis, 0, -1);
-		List<Object> girlList = new ArrayList<>();
+		List<Object> girlList = new ArrayList<Object>();
 		if(girlRedisList == null || girlRedisList.size() == 0){
 			//redis中没有妹纸，需要从数据看中查出并放入到redis中
 			synchronized (GirlServiceImpl.class) {
@@ -264,7 +271,7 @@ public class GirlServiceImpl implements GirlService {
 	@Override
 	public Object findVipGirlFromRedis(long start, long end) throws Exception {
 		girlVipRedisList = redisUtils.getList(girlVipListRedis, 0, -1);
-		List<Object> girlList = new ArrayList<>();
+		List<Object> girlList = new ArrayList<Object>();
 		if(girlVipRedisList == null || girlVipRedisList.size() == 0){
 			synchronized (GirlServiceImpl.class) {
 				if(girlVipRedisList == null || girlVipRedisList.size() == 0){
@@ -281,6 +288,33 @@ public class GirlServiceImpl implements GirlService {
 		}else{
 			logger.info("redis中有VIP妹纸，直接从redis中取出");
 			girlList = redisUtils.getList(girlVipListRedis, start, end);
+		}
+		return girlList;
+	}
+	
+	/**
+	 * 从redis中查找活动妹纸
+	 */
+	@Override
+	public Object findActiveGirlFromRedis(long start, long end) throws Exception {
+		girlActiveRedisList = redisUtils.getList(girlActiveRedis, 0, -1);
+		List<Object> girlList = new ArrayList<Object>();
+		if(girlActiveRedisList == null || girlActiveRedisList.size() == 0){
+			synchronized (GirlServiceImpl.class) {
+				if(girlActiveRedisList == null || girlActiveRedisList.size() == 0){
+					//redis中没活动妹纸，需要从数据库中查出
+					logger.info("正在数据库中查出活动妹纸放入到数据库中");
+					String hql = "from Girl g where g.delflag=0 and g.isActivity=1 order by g.sort asc";
+					girlActiveRedisList = girlDao.findByHql(hql);
+					for(Object obj:girlActiveRedisList){
+						redisUtils.setList(girlActiveRedis, obj);
+					}
+					logger.info("全部活动妹纸已经放入到redis中");
+				}
+			}
+		}else{
+			logger.info("redis中有活动妹纸，直接从redis中取出");
+			girlList = redisUtils.getList(girlActiveRedis, start, end);
 		}
 		return girlList;
 	}
@@ -345,7 +379,7 @@ public class GirlServiceImpl implements GirlService {
 	 */
 	@Override
 	public Object findGirlImgsByGirlId(String girlId) throws Exception {
-		List<GirlImg> girlImgList = new ArrayList<>();
+		List<GirlImg> girlImgList = new ArrayList<GirlImg>();
 		if(!StringUtils.isBlank(girlId) && StringUtils.isNumeric(girlId)){
 			String hql = "from GirlImg g where g.girl.girlId="+Integer.parseInt(girlId)+"";
 			girlImgList = girlImgDao.findByHql(hql);

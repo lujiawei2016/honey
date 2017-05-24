@@ -39,14 +39,14 @@ public class CategoryDetailServiceImpl implements CategoryDetailService {
 	@Autowired
 	private RedisUtils redisUtils;
 	
-	private static volatile List<Object> categoryGirlList = new ArrayList<>();
+	private static volatile List<Object> categoryGirlList = new ArrayList<Object>();
 
 	/**
 	 * 根据categoryId获取该种类的妹纸
 	 */
 	@Override
 	public Object getCategoryGirlByCategoryId(String categoryId,long start, long end) throws Exception {
-		List<Object> categoryDetailList = new ArrayList<>();
+		List<Object> categoryDetailList = new ArrayList<Object>();
 		if(!StringUtils.isBlank(categoryId) && StringUtils.isNumeric(categoryId)){
 			//首先判断该种类的妹纸在redis中是否存在
 			categoryGirlList = redisUtils.getList(categoryGirlRedis+categoryId, 0, -1);

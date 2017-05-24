@@ -39,9 +39,9 @@
                 <span class="mui-icon mui-icon-extra mui-icon-extra-class"></span>
                 <span class="mui-tab-label">高端</span>
             </a>
-            <a class="aui-tab-item" href="javascript:;">
+            <a class="aui-tab-item" href="${ctx}/contactUs/contact">
                 <span class="mui-icon mui-icon-extra mui-icon-extra-cart"></span>
-                <span class="mui-tab-label">绿色商城</span>
+                <span class="mui-tab-label">联系我们</span>
             </a>
             <a class="aui-tab-item" href="${ctx}/car/listCar">
                 <span class="mui-icon mui-icon-extra mui-icon-extra-news"></span>

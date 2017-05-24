@@ -35,7 +35,7 @@ public class DetailController {
 	 */
 	@RequestMapping(value="/girlDetail/{girlId}")
 	public String girlDetail(@PathVariable String girlId,ModelMap modelMap){
-		Map<String, Object> dataMap = new HashMap<>();
+		Map<String, Object> dataMap = new HashMap<String, Object>();
 		try {
 			dataMap = (Map<String, Object>) detailService.getGirl(girlId);
 			if(dataMap != null && dataMap.size() != 0){

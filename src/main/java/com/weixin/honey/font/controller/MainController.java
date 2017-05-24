@@ -1,5 +1,6 @@
 package com.weixin.honey.font.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -46,15 +47,24 @@ public class MainController {
 	public String index(ModelMap modelMap){
 		Object bannerList = null;      // 轮播图
 		Object categoryList = null;    // 种类
+		List<Girl> activityGirlList = new ArrayList<Girl>(); //活动妹纸
 		try {
 			bannerList = bannerService.findAllBanner();
 			categoryList = categoryService.findAllCategory();
+			
+			activityGirlList = (List<Girl>) girlService.findActiveGirlFromRedis(0, -1);
+			if(activityGirlList == null || activityGirlList.size() == 0){
+				logger.info("第一次活动活动妹纸失败，重新获取");
+				activityGirlList = (List<Girl>) girlService.findActiveGirlFromRedis(0, -1);
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		modelMap.put("bannerList", bannerList);
 		modelMap.put("categoryList", categoryList);
+		modelMap.put("activityGirlList", activityGirlList);
 		
 		return "front/index";
 	}

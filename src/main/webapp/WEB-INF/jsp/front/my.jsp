@@ -77,7 +77,7 @@
 <div class="tab-bar tab-bottom">
 	<a class="tab-button cached" href="${ctx}/main/index"><i class="tab-button-icon icon icon-home"></i><span class="tab-button-txt">首页</span></a>
 	<a class="tab-button cached" href="${ctx}/vip/listVip"><i class="tab-button-icon icon icon-exhibition"></i><span class="tab-button-txt">高端</span></a>
-	<a class="tab-button cached" href="${ctx}/car/listCar"><i class="tab-button-icon icon icon-service"></i><span class="tab-button-txt">分类</span></a>
+	<a class="tab-button cached" href="${ctx}/contactUs/contact"><i class="tab-button-icon icon icon-service"></i><span class="tab-button-txt">联系我们</span></a>
 	<a class="tab-button cached" href="${ctx}/car/listCar"><i class="tab-button-icon icon icon-car"></i><span class="tab-button-txt">备战区</span></a>
 	<a class="tab-button active" href="javascript:;"><i class="tab-button-icon icon icon-my"></i><span class="tab-button-txt">我的</span></a>
 </div>

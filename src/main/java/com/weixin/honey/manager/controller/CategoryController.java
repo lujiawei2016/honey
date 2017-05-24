@@ -36,7 +36,7 @@ public class CategoryController {
 	@RequestMapping(value="/listCategory")
 	@RequiresPermissions("category:listIcon")
 	public String listCategory(ModelMap modelMap){
-		Object categoryList = new ArrayList<>();
+		Object categoryList = new ArrayList<Object>();
 		try {
 			categoryList = categoryService.findAllCategory();
 			modelMap.put("categoryList", categoryList);

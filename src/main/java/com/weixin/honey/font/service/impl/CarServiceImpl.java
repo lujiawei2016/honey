@@ -46,7 +46,7 @@ public class CarServiceImpl implements CarService {
 	 */
 	@Override
 	public Object listCar(int userId, long start, long end) {
-		List<Object> carList = new ArrayList<>();
+		List<Object> carList = new ArrayList<Object>();
 		carList = redisUtils.getList(carRedis+userId, 0, -1);
 		if(carList == null || carList.size() == 0){
 			logger.info("该用户("+userId+")在redis备战区中没有妹纸，需要从数据库中取出并放入到redis中");

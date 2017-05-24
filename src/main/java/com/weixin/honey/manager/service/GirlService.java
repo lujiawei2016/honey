@@ -55,6 +55,15 @@ public interface GirlService {
 	public Object findVipGirlFromRedis(long start, long end) throws Exception;
 	
 	/**
+	 * 从redis中查找活动妹纸
+	 * @param start
+	 * @param end
+	 * @return
+	 * @throws Exception
+	 */
+	public Object findActiveGirlFromRedis(long start, long end) throws Exception;
+	
+	/**
 	 * 删除图片
 	 * @param girlImgId
 	 * @return

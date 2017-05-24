@@ -37,7 +37,7 @@ public class BannerController {
 	@RequestMapping(value="/listBanner",produces="text/json;charset=UTF-8")
 	@RequiresPermissions("banner:listBanner")
 	public String listBanner(ModelMap modelMap){
-		List<Banner> bannerList = new ArrayList<>();
+		List<Banner> bannerList = new ArrayList<Banner>();
 		try {
 			bannerList = (List<Banner>) bannerService.findAllBanner();
 		} catch (Exception e) {

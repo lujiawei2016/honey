@@ -83,6 +83,7 @@ $(document).ready(function(){
 		var title = $('#title').val();
 		var description = $('#description').val();
 		var isVip = $('#isVip').val();
+		var isActivity = $('#isActivity').val();
 		var sort = $('#sort').val();
 		
 		if(girlId == null || girlId == undefined || girlId==''){
@@ -91,7 +92,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			url:path+'/girl/update',
-			data:{'mainImg':mainImg,'categorys':categorys+'','girlImgs':girlImgs,'girlId':girlId,'girlName':girlName,'age':age,'hight':hight,'weight':weight,'qq':qq,'weixin':weixin,'phone':phone,'price':price,'address':address,'title':title,'description':description,'sort':sort,'isVip':isVip},
+			data:{'mainImg':mainImg,'categorys':categorys+'','girlImgs':girlImgs,'girlId':girlId,'girlName':girlName,'age':age,'hight':hight,'weight':weight,'qq':qq,'weixin':weixin,'phone':phone,'price':price,'address':address,'title':title,'description':description,'sort':sort,'isVip':isVip,'isActivity':isActivity},
 			dataType:'json',
 			type:'post',
 			beforeSend:function(){

@@ -3,11 +3,10 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	
-	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>备战区</title>
-	<link rel="stylesheet" type="text/css" href="${ctx}/resource/css/ui.css">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>备战区</title>
+<link rel="stylesheet" type="text/css" href="${ctx}/resource/css/ui.css">
 </head>
 <body>
 <input type="hidden" id="path" value="${ctx}" />
@@ -64,7 +63,7 @@
 			</div>
 		</div>
 		<!--结算信息 end-->
-
+		
 	</div>
 </div>
 
