@@ -63,6 +63,7 @@ public class CategoryController {
 	 * @return
 	 */
 	@RequestMapping("/updateCategory")
+	@RequiresPermissions("category:updateCategory")
 	@ResponseBody
 	public Object updateCategory(Category category){
 		String result = "";
@@ -80,6 +81,7 @@ public class CategoryController {
 	 * @return
 	 */
 	@RequestMapping("/deleteCategory")
+	@RequiresPermissions("category:categoryId")
 	@ResponseBody
 	public Object deleteCategory(String categoryId){
 		Object result = "";

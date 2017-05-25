@@ -3,6 +3,7 @@ package com.weixin.honey.manager.controller;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,6 +38,7 @@ public class GirlController {
 	 * @return
 	 */
 	@RequestMapping("/listGirlPage")
+	@RequiresPermissions("girl:listGirlPage")
 	public String listGirlPage(ModelMap modelMap,Girl girl){
 		Object girlList = null;
 		try {
@@ -55,6 +57,7 @@ public class GirlController {
 	 * @return
 	 */
 	@RequestMapping("/listRedisGirl")
+	@RequiresPermissions("girl:listRedisGirl")
 	public String listRedisGirl(ModelMap modelMap){
 		List<Girl> girlList = null;
 		try {
@@ -76,6 +79,7 @@ public class GirlController {
 	 * @return
 	 */
 	@RequestMapping("/listVIPRedisGirl")
+	@RequiresPermissions("girl:listVIPRedisGirl")
 	public String listVIPRedisGirl(ModelMap modelMap){
 		List<Girl> girlList = null;
 		try {
@@ -98,6 +102,7 @@ public class GirlController {
 	 * @return
 	 */
 	@RequestMapping("/goUpdate")
+	@RequiresPermissions("girl:goUpdate")
 	public String goUpdate(String girlId,ModelMap modelMap){
 		Object girl = null;
 		Object categoryList = null;
@@ -121,6 +126,7 @@ public class GirlController {
 	 * @return
 	 */
 	@RequestMapping("/update")
+	@RequiresPermissions("girl:update")
 	@ResponseBody
 	public String update(Girl girl,String girlImgs,String categorys){
 		String result = null;
@@ -139,6 +145,7 @@ public class GirlController {
 	 * @return
 	 */
 	@RequestMapping("/deleteGirlImgsById")
+	@RequiresPermissions("girl:deleteGirlImgsById")
 	@ResponseBody
 	public String deleteGirlImgsById(String girlImgId){
 		String result = null;
@@ -157,6 +164,7 @@ public class GirlController {
 	 * @return
 	 */
 	@RequestMapping("/deleteOrLifelById")
+	@RequiresPermissions("girl:deleteOrLifelById")
 	@ResponseBody
 	public String deleteOrLifelById(String girlId){
 		String result = "";

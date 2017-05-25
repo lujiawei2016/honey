@@ -44,6 +44,8 @@
 				/roles/** = authc
 				/upload/** = authc
 				/user/** = authc
+				/activity/** = authc
+				
 				
 			</value>
 		</property>
