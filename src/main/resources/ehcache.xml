@@ -13,7 +13,6 @@
         timeToLiveSeconds="7200"
         memoryStoreEvictionPolicy="FIFO" />
         
-    <!-- 权限缓存 -->
     <cache name="permissionCache" 
         maxElementsInMemory="10000" 
         eternal="false"
@@ -22,7 +21,6 @@
         timeToLiveSeconds="7200"
         memoryStoreEvictionPolicy="FIFO" />
         
-    <!-- 验证码缓存 -->
     <cache name="verificationCodeCache"
         maxElementsInMemory="10000" 
         eternal="false"
