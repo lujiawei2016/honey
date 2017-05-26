@@ -59,7 +59,7 @@
 				（共<span class="girlNum">0</span>件，不含运费）
 			</div>
 			<div class="settlement_right">
-				<a href="javascript:;" class="settlementBtn">去结算</a>
+				<a href="javascript:;" class="settlementBtn">约会金额</a>
 			</div>
 		</div>
 		<!--结算信息 end-->

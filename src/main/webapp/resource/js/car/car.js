@@ -37,6 +37,8 @@ $(document).ready(function(){
 			$(".main_con_allchoose img").css("display","none");
 		}
 		
+		return false;
+		
 	});
 	
 	$(document).on('click','.delCar',function(){
@@ -129,4 +131,9 @@ $(document).ready(function(){
 		$('.girlNum').html(girlNum);
 	});
 	
+	//点击商品列表li
+	$('.main_con_goods ul li').click(function(){
+		var girlId = ($(this).find('.circle').attr('id')).replace('circle','');
+		window.location.href=path+'/detail/girlDetail/'+girlId+'';
+	});
 });
