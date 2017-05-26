@@ -1,9 +1,11 @@
 package com.weixin.honey.font.service.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.weixin.honey.dao.BaseDao;
 import com.weixin.honey.font.service.DetailService;
 import com.weixin.honey.manager.service.GirlService;
 import com.weixin.honey.pojo.Girl;
@@ -35,11 +38,17 @@ public class DetailServiceImpl implements DetailService {
 	@Value("${girlImgsRedis}")
 	private String girlImgsRedis;
 	
+	@Value("${praiseRedis}")
+	private String praiseRedis;      //点赞键
+	
 	@Autowired
 	private RedisUtils redisUtils;
 	
 	@Autowired
 	private GirlService girlService;
+	
+	@Autowired
+	private BaseDao<Girl, Serializable> girlDao;
 	
 	private static volatile List<Object> objList = new ArrayList<Object>();
 	
@@ -95,6 +104,40 @@ public class DetailServiceImpl implements DetailService {
 		}
 		
 		return dataMap;
+	}
+
+	/**
+	 * 点赞
+	 */
+	@Override
+	public Object thumbUp(String girlid,int userId) throws Exception {
+		String result = "0";
+		if(!StringUtils.isBlank(girlid) && StringUtils.isNumeric(girlid)){
+			//判断用户在24小时内对该妹纸是否点赞
+			String isPraise = (String) redisUtils.getValue(praiseRedis+userId+girlid);
+			if(isPraise == null || isPraise == ""){
+				//用户在24小时内没有点赞，可以点赞
+				Girl girl = girlDao.findById(Girl.class, Integer.parseInt(girlid));
+				if(girl != null){
+					Girl redisGirl = (Girl) redisUtils.getValue(girlSingleRedis+girlid);
+					girl.setPraise(redisGirl.getPraise()+1);
+					
+					girlDao.update(girl);
+					redisUtils.setValue(girlSingleRedis+girlid, girl);
+					
+					//设置24小时只能对一个妹纸点赞一次
+					redisUtils.setValue(praiseRedis+userId+girlid, "1", 24, TimeUnit.HOURS);
+					
+					logger.info("用户("+userId+")点赞成功");
+					
+					result = "1";
+				}
+			}else{
+				//用户在24小时已经点赞了，不可以再点赞
+				result = "2";
+			}
+		}
+		return result;
 	}
 
 }

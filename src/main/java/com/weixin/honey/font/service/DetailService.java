@@ -14,4 +14,13 @@ public interface DetailService {
 	 * @return
 	 */
 	public Object getGirl(String girlId) throws Exception;
+
+	/**
+	 * 点赞
+	 * @param girlid
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	public Object thumbUp(String girlid,int userId) throws Exception;
 }

@@ -67,7 +67,7 @@ $(document).ready(function(){
 		$('.preSaleDiv').show();
 	});
 	
-	//点击加入备战区
+	//点击加入待约区
 	$(document).on('click','.fighting',function(){
 		var girlId = $('#girlId').val();
 		$.ajaxSetup({
@@ -81,13 +81,13 @@ $(document).ready(function(){
 			success:function(result){
 				if('1' == result){
 					layer.open({
-						content: '加入备战区成功',
+						content: '加入待约区成功',
 						skin: 'msg',
 						time: 2 //2秒后自动关闭
 				  });
 				}else if('2' == result){
 					layer.open({
-						content:'备战区已存在该妹纸',
+						content:'待约区已存在该妹纸',
 						btn:'确定'
 					});
 				}else{
@@ -120,4 +120,57 @@ $(document).ready(function(){
 		$.ajax();
 	});
 	
+	//点击点赞按钮
+	$(document).on('click','.thumb',function(){
+		var girlId = $('#girlId').val();
+		$.ajaxSetup({
+			url:path+'/detail/thumbUp',
+			data:{'girlId':girlId},
+			dataType:'json',
+			type:'post',
+			beforeSend:function(){
+				
+			},
+			success:function(result){
+				if('1' == result){
+					layer.open({
+						content: '点赞成功',
+						skin: 'msg',
+						time: 2 //2秒后自动关闭
+					});
+					$('.thumb').removeClass('aui-icon-gz').addClass('aui-icon-gz-full');
+				}else if('2' == result){
+					layer.open({
+						content:'24小时内只能点赞一次哦',
+						btn:'确定'
+					});
+				}else{
+					layer.open({
+						content:'系统繁忙，请稍后重试',
+						btn:'确定'
+					});
+				}
+			},
+			error:function(){
+				layer.open({
+					content:'系统繁忙，请稍后重试',
+					btn:'确定'
+				});
+			},
+			complete:function(xhr,status){
+				var sessionStatus = xhr.getResponseHeader('sessionstatus');
+		        if(sessionStatus == 'timeout') {
+		        	layer.open({
+		        	    content: '您还没有登录，是否跳到登录页面？',
+		        	    btn: ['好的', '再看看'],
+		        	    yes: function(index){
+		        	    	window.location.href=path+'/userLogin/loginGirl';
+		        	    }
+		        	});
+		        }
+			}
+		});
+		
+		$.ajax();
+	});
 });

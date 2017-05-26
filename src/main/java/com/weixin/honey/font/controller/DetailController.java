@@ -3,14 +3,18 @@ package com.weixin.honey.font.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.weixin.honey.font.service.DetailService;
+import com.weixin.honey.pojo.User;
 
 /**
  * 详情controller
@@ -48,6 +52,25 @@ public class DetailController {
 			e.printStackTrace();
 		}
 		return "front/girlDetail";
+	}
+
+	/**
+	 * 点赞
+	 * @param girlid
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/thumbUp")
+	@ResponseBody
+	public Object thumbUp(String girlId,HttpServletRequest request){
+		Object result = "";
+		User user = (User) request.getSession().getAttribute("user");
+		try {
+			result = detailService.thumbUp(girlId, user.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 }

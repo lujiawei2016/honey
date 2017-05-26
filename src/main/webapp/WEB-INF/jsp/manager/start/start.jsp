@@ -207,6 +207,12 @@
                 <li><a href="${ctx}/girl/listVIPRedisGirl" target="windowFrame">高端redis妹纸</a></li>
               </ul>
             </li>
+            <li class="treeview">
+              <a href="javascript:;"><i class="fa fa-link"></i> <span>微信管理</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                <li><a href="${ctx}/wxMenu/listMenu" target="windowFrame">微信菜单管理</a></li>
+              </ul>
+            </li>
           </ul><!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->

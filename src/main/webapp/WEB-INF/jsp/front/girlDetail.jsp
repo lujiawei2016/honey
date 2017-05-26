@@ -71,8 +71,8 @@
 
 <section class="content">
 	<div class="nav">
-		<a href="javascript:;" class="active goodsDetail">商品详细</a>
-		<a href="javascript:;" class="preSale">简介须知</a>
+		<a href="javascript:;" class="active goodsDetail">个人图片</a>
+		<a href="javascript:;" class="preSale">个人简介</a>
 	</div>
 	<div class="desc goodsDetailDiv">
 		<c:forEach var="girlImg" items="${dataMap.girlImgList}">
@@ -123,13 +123,12 @@
 	<div class="aui-car-ear">
 		<div class="aui-car-ear-cell">
 			<div class="aui-li">
-				<a href="javascript:;" class="aui-icon-gz"></a>
+				<a href="javascript:;" class="aui-icon-gz thumb"></a>
 				<a href="javascript:;"></a>
-				<a href="${ctx}/car/listCar" class="aui-icon-gw"></a>
 			</div>
 		</div>
-		<div class="fighting"><a href="javascript:;" class="aui-car-all">加入备战区</a></div>
-		<div class=""><a href="${ctx}/car/listCar" class="aui-car-lli">查看备战区</a></div>
+		<div class="fighting"><a href="javascript:;" class="aui-car-all">加入待约区</a></div>
+		<div class=""><a href="${ctx}/car/listCar" class="aui-car-lli">查看待约区</a></div>
 	</div>
 
 </footer>

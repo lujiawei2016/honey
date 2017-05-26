@@ -99,6 +99,7 @@
     		<mvc:mapping path="/roles/**"/>
     		<mvc:mapping path="/permission/**"/>
     		<mvc:mapping path="/user/**"/>
+    		<mvc:mapping path="/wxMenu/**"/>
     		<bean class="com.weixin.honey.interceptor.SessionInterceptor"></bean>
     	</mvc:interceptor>
 
@@ -106,6 +107,7 @@
     	<mvc:interceptor>
     		<mvc:mapping path="/car/**"/>
     		<mvc:mapping path="/my/**"/>
+    		<mvc:mapping path="/detail/thumbUp"/>
     		<bean class="com.weixin.honey.interceptor.FontInterceptor"></bean>
     	</mvc:interceptor>
     </mvc:interceptors>

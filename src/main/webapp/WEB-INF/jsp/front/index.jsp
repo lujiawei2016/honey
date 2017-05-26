@@ -6,7 +6,7 @@
 	
 	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>幸福生活</title>
+	<title>诚信交友</title>
 	<link rel="stylesheet" type="text/css" href="${ctx}/resource/css/ui.css">
 	<style type="text/css">
 	.loadDiv{width: 100%;height: 32px;line-height: 32px;text-align: center;}
@@ -23,7 +23,7 @@
 			<div class="toolbar statusbar-padding" style="min-height:50px">
 				<button class="bar-button back-button"><i class="icon icon-sao"></i></button>
 				<div class="header-title" style="height:50px; padding:0 50px">
-					<div class="title aui-title-input"><input type="text" placeholder="秋季新品"></div>
+					<div class="title aui-title-input"><input type="text" placeholder="请输入需要搜索的内容"></div>
 				</div>
 				<a href="javascript:;">
 					<button class="icon aui-icon-mag"></button>
@@ -95,7 +95,7 @@
 		<div class="b-line" style="position:relative"></div>
 
 		<div class="aui-title-h">
-			<h2>大牌热卖</h2>
+			<h2>热门交友</h2>
 		</div>
 		<div class="aui-flex">
 			<c:forEach var="girl" items="${activityGirlList}">
@@ -108,7 +108,7 @@
 			</c:forEach>
 		</div>
 		<div class="aui-title-h">
-			<h2>新品上架</h2>
+			<h2>最新交友</h2>
 		</div>
 		
 		<div class="loadDiv">
@@ -119,7 +119,7 @@
 			<a class="tab-button active" href="javascript:;"><i class="tab-button-icon icon icon-home"></i><span class="tab-button-txt">首页</span></a>
 			<a class="tab-button cached" href="${ctx}/vip/listVip"><i class="tab-button-icon icon icon-exhibition"></i><span class="tab-button-txt">高端</span></a>
 			<a class="tab-button cached" href="${ctx}/contactUs/contact"><i class="tab-button-icon icon icon-service"></i><span class="tab-button-txt">联系我们</span></a>
-			<a class="tab-button cached" href="${ctx}/car/listCar"><i class="tab-button-icon icon icon-car"></i><span class="tab-button-txt">备战区</span></a>
+			<a class="tab-button cached" href="${ctx}/car/listCar"><i class="tab-button-icon icon icon-car"></i><span class="tab-button-txt">待约区</span></a>
 			<a class="tab-button cached" href="${ctx}/my/myInfo"><i class="tab-button-icon icon icon-my"></i><span class="tab-button-txt">我的</span></a>
 		</div>
 	</div>

@@ -5,7 +5,7 @@
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>备战区</title>
+<title>待约区</title>
 <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/ui.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
 			<div class="toolbar statusbar-padding">
 				<button class="bar-button back-button" onclick="history.go(-1);" dwz-event-on-click="click"><i class="icon icon-back"></i></button>
 				<div class="header-title">
-					<div class="title">备战区</div>
+					<div class="title">待约区</div>
 				</div>
 			</div>
 		</div>

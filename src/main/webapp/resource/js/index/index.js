@@ -40,7 +40,7 @@ $(document).ready(function(){
 								'</span>'+
 								'<a href="'+path+'/detail/girlDetail/'+result[i].girlId+'" class="aui-flex-box">'+
 									'<h2>'+result[i].title+' </h2>'+
-									'<em>￥'+result[i].price+'</em>'+
+									'<em>见面礼：￥'+result[i].price+'</em>'+
 								'</a>'+
 							'</div>'
 						}else{
@@ -52,7 +52,7 @@ $(document).ready(function(){
 								'</span>'+
 								'<a href="'+path+'/detail/girlDetail/'+result[i].girlId+'" class="aui-flex-box">'+
 									'<h2>'+result[i].title+' </h2>'+
-									'<em>￥'+result[i].price+'</em>'+
+									'<em>见面礼：￥'+result[i].price+'</em>'+
 								'</a>'+
 							'</div>'+
 						'</div>'

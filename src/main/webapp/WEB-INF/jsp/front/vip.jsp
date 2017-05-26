@@ -45,7 +45,7 @@
             </a>
             <a class="aui-tab-item" href="${ctx}/car/listCar">
                 <span class="mui-icon mui-icon-extra mui-icon-extra-news"></span>
-                <span class="mui-tab-label">备战区</span>
+                <span class="mui-tab-label">待约区</span>
             </a>
             <a class="aui-tab-item" href="${ctx}/my/myInfo">
                 <span class="mui-icon mui-icon-extra mui-icon-extra-people"></span>

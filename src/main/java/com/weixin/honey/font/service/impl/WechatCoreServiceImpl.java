@@ -5,24 +5,29 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.weixin.honey.font.service.WechatCoreService;
 import com.weixin.honey.message.resp.TextMessage;
 import com.weixin.honey.util.MessageUtil;
 
 /**
- * 微信核心服务类
- * @author   jiawei
- * @version  V1.0
- * @date     2017年5月23日下午8:15:04
+ * 微信核心类
+ * @author  lujiawei
+ * @version V1.0
+ * @date    2017年5月26日上午11:01:43
  */
-public class CoreService {
+@Service
+@Transactional
+public class WechatCoreServiceImpl implements WechatCoreService {
 
-	 /** 
-     * 处理微信发来的请求 
-     *  
-     * @param request 
-     * @return 
-     */  
-    public static String processRequest(HttpServletRequest request) {  
+	/**
+	 * 接收微信请求并处理
+	 */
+	@Override
+	public String processRequest(HttpServletRequest request) {
+		  
         String respMessage = null;  
         try {  
             // 默认返回的文本消息内容  
@@ -91,5 +96,7 @@ public class CoreService {
         }  
   
         return respMessage;  
-    }  
+    
+	}
+
 }

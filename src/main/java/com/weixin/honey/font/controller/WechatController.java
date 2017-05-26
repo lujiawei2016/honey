@@ -3,11 +3,13 @@ package com.weixin.honey.font.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.weixin.honey.font.service.impl.CoreService;
+import com.weixin.honey.font.service.WechatCoreService;
+import com.weixin.honey.manager.service.TokenService;
 
 /**
  * 微信核心类
@@ -18,6 +20,12 @@ import com.weixin.honey.font.service.impl.CoreService;
 @Controller
 @RequestMapping("/wechat")
 public class WechatController {
+	
+	@Autowired
+	private WechatCoreService wechatCoreService;
+	
+	@Autowired
+	private TokenService tokenService;
 
 	/**
 	 * 接收微信请求（用于对接微信）
@@ -48,11 +56,10 @@ public class WechatController {
         response.setCharacterEncoding("UTF-8");  
   
         // 调用核心业务类接收消息、处理消息  
-        String respMessage = CoreService.processRequest(request);  
+        String respMessage = wechatCoreService.processRequest(request);  
           
         // 响应消息  
         return respMessage;
 	}
-	
 	
 }
