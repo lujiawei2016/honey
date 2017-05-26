@@ -68,6 +68,7 @@ public class DetailController {
 		try {
 			result = detailService.thumbUp(girlId, user.getId());
 		} catch (Exception e) {
+			logger.error("点赞异常");
 			e.printStackTrace();
 		}
 		return result;

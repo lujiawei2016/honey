@@ -59,6 +59,7 @@ public class MainController {
 			}
 			
 		} catch (Exception e) {
+			logger.error("跳到主页异常");
 			e.printStackTrace();
 		}
 		
@@ -86,6 +87,7 @@ public class MainController {
 					girlList = (List<Girl>) girlService.findGirlFromRedis(Integer.parseInt(start), Integer.parseInt(start)+19);
 				}
 			} catch (Exception e) {
+				logger.error("加载妹纸异常");
 				e.printStackTrace();
 			}
 		}

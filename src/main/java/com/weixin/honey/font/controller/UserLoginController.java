@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,8 @@ import com.weixin.honey.font.service.UserLoginService;
 @Controller
 @RequestMapping("/userLogin")
 public class UserLoginController {
+	
+	private static final Logger logger = Logger.getLogger(UserLoginController.class);
 	
 	@Autowired
 	private UserLoginService userLoginService;
@@ -65,6 +68,7 @@ public class UserLoginController {
 		try {
 			response.sendRedirect(request.getContextPath()+"/main/index");
 		} catch (IOException e) {
+			logger.error("跳到注册页面异常");
 			e.printStackTrace();
 		}
 		return "front/register";
@@ -83,6 +87,7 @@ public class UserLoginController {
 		try {
 			result = userLoginService.loginInGirl(request, username, password);
 		} catch (Exception e) {
+			logger.error("跳到登陆页面异常");
 			e.printStackTrace();
 		}
 		return result;
@@ -101,6 +106,7 @@ public class UserLoginController {
 		try {
 			result = (String) userLoginService.registerIn(request,username, password);
 		} catch (Exception e) {
+			logger.error("用户注册异常");
 			e.printStackTrace();
 		}
 		return result;

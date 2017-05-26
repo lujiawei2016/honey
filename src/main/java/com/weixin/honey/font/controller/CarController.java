@@ -61,6 +61,7 @@ public class CarController {
 		try {
 			result = carService.addCar(user.getId(), girlId);
 		} catch (Exception e) {
+			logger.error("加入备战区异常");
 			e.printStackTrace();
 		}
 		return result;
@@ -80,6 +81,7 @@ public class CarController {
 		try {
 			result = carService.deleteCar(girlIds, user.getId());
 		} catch (Exception e) {
+			logger.error("删除购物车异常");
 			e.printStackTrace();
 		}
 		return result;

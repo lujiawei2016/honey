@@ -42,6 +42,7 @@ public class VipController {
 			}
 			modelMap.put("girlList", girlList);
 		} catch (Exception e) {
+			logger.error("列出所有VIP妹纸异常");
 			e.printStackTrace();
 		}
 		return "front/vip";

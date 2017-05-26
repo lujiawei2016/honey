@@ -1,5 +1,6 @@
 package com.weixin.honey.font.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,6 +20,8 @@ import com.weixin.honey.manager.service.CategoryService;
 @Controller
 @RequestMapping("/categoryDetail")
 public class CategoryDetailController {
+	
+	private static final Logger logger = Logger.getLogger(CategoryDetailController.class);
 	
 	@Autowired
 	private CategoryDetailService categoryDetailService;
@@ -42,6 +45,7 @@ public class CategoryDetailController {
 			modelMap.put("categoryDetailList", categoryDetailList);
 			modelMap.put("category", category);
 		} catch (Exception e) {
+			logger.error("跳到种类页面异常");
 			e.printStackTrace();
 		}
 		return "front/girlCategory";
@@ -61,6 +65,7 @@ public class CategoryDetailController {
 		try {
 			categoryDetailList = categoryDetailService.getCategoryGirlByCategoryId(categoryId,start,end);
 		} catch (Exception e) {
+			logger.error("ajax列出妹纸异常");
 			e.printStackTrace();
 		}
 		return categoryDetailList;
