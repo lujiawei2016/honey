@@ -99,6 +99,11 @@
     		<mvc:mapping path="/roles/**"/>
     		<mvc:mapping path="/permission/**"/>
     		<mvc:mapping path="/user/**"/>
+    		<mvc:mapping path="/banner/**"/>
+    		<mvc:mapping path="/category/**"/>
+    		<mvc:mapping path="/girl/**"/>
+    		<mvc:mapping path="/activity/**"/>
+    		<mvc:mapping path="/"/>
     		<mvc:mapping path="/wxMenu/**"/>
     		<bean class="com.weixin.honey.interceptor.SessionInterceptor"></bean>
     	</mvc:interceptor>

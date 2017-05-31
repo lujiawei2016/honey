@@ -65,11 +65,13 @@ public class UserLoginController {
 	 */
 	@RequestMapping(value="/registerUser")
 	public String registerUser(HttpServletResponse response,HttpServletRequest request){
-		try {
-			response.sendRedirect(request.getContextPath()+"/main/index");
-		} catch (IOException e) {
-			logger.error("跳到注册页面异常");
-			e.printStackTrace();
+		Object user = request.getSession().getAttribute(userSession);
+		if(user != null){
+			try {
+				response.sendRedirect(request.getContextPath()+"/main/index");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return "front/register";
 	}
