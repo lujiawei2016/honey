@@ -181,6 +181,8 @@ public class GirlServiceImpl implements GirlService {
 			}
 			
 			girlDao.update(oldGirl);
+			redisUtils.delete(girlSingleRedis+oldGirl.getGirlId());
+			
 			logger.info("编辑妹纸成功");
 			result = "2";
 		}
@@ -189,6 +191,7 @@ public class GirlServiceImpl implements GirlService {
 		redisUtils.delete(girlListRedis);
 		redisUtils.delete(girlVipListRedis);
 		redisUtils.delete("girlActiveRedis");
+		
 		logger.info("移除redis中的列表，待查询时重新排序");
 		
 		return result;

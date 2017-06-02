@@ -98,7 +98,7 @@
 					<label>体重</label> ${dataMap.girl.weight}
 				</li>
 				<li>
-					<label>QQ</label> ${dataMap.girl.qq}
+					<label>Q&nbsp;&nbsp;Q</label> ${dataMap.girl.qq}
 				</li>
 				<li>
 					<label>微信</label> ${dataMap.girl.weixin}
