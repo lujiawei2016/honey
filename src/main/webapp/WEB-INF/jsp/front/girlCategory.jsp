@@ -21,7 +21,7 @@
 	<div class="toolbar statusbar-padding">
 		<button class="bar-button back-button" onclick="history.go(-1);" dwz-event-on-click="click"><i class="icon icon-back"></i></button>
 		<div class="header-title">
-			<div class="title">新品上架</div>
+			<div class="title">${category.cateName}妹纸专区</div>
 		</div>
 	</div>
 </div>
