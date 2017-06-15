@@ -252,7 +252,7 @@ public class GirlServiceImpl implements GirlService {
 			synchronized (GirlServiceImpl.class) {
 				logger.info("正在查询妹纸放入到数据库中");
 				if(girlRedisList == null || girlRedisList.size() == 0){
-					String hql = "from Girl g where g.delflag=0 and g.isVip=0 order by g.sort asc";
+					String hql = "from Girl g where g.delflag=0 and g.isVip=0 and g.isActivity=0 order by g.sort asc";
 					girlRedisList = girlDao.findByHql(hql);
 					for(Object obj:girlRedisList){
 						redisUtils.setList(girlListRedis, obj);
