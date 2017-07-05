@@ -5,17 +5,17 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>高端</title>
+    <title>热门</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <link rel="stylesheet" type="text/css" href="${ctx}/resource/js/swiper/swiper.min.css">
     <link rel="stylesheet" type="text/css" href="${ctx}/resource/css/vip.css">
 </head>
 <body>
     <header class="mui-bar mui-bar-nav aui-header b-line">
-        <h1 class="mui-title">高端</h1>
+        <h1 class="mui-title">热门</h1>
     </header>
     <div class="mui-title-text">
-        <p>绿色公益 权威发布</p>
+        <p></p>
     </div>
     <div class="swiper-container">
         <div class="swiper-wrapper">
@@ -37,7 +37,7 @@
             </a>
             <a href="javascript:;" class="aui-tab-item mui-active">
                 <span class="mui-icon mui-icon-extra mui-icon-extra-class"></span>
-                <span class="mui-tab-label">高端</span>
+                <span class="mui-tab-label">热门</span>
             </a>
             <a class="aui-tab-item" href="${ctx}/contactUs/contact">
                 <span class="mui-icon mui-icon-extra mui-icon-extra-cart"></span>
